@@ -11,6 +11,10 @@
   transition: opacity 0.5s linear;
 }
 
+.popup__close:hover {
+  opacity: 0.8;
+}
+
 @media screen and (max-width: 767px) {
   .popup__close {
     top: -37px;

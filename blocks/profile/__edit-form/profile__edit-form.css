@@ -7,7 +7,7 @@
 
   border: 2px solid #fff;
   box-sizing: border-box;
-  background: no-repeat center url(/images/edit-form.svg);
+  background: no-repeat center url(../../../images/edit-form.svg);
   background-size: 22px;
 
   cursor: pointer;

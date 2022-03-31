@@ -22,6 +22,6 @@
 
 ## URL:
 
-https://aleksandrzakharov58.github.io/russian-travel/
+https://aleksandrzakharov58.github.io/mesto/
 
 ***
