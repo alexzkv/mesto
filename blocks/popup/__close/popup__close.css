@@ -1,0 +1,21 @@
+.popup__close {
+  position: absolute;
+  top: -40px;
+  right: -40px;
+  height: 32px;
+  width: 32px;
+  background: transparent no-repeat center url(/images/cross.svg);
+  background-size: 100%;
+  border: 0;
+  cursor: pointer;
+  transition: opacity 0.5s linear;
+}
+
+@media screen and (max-width: 767px) {
+  .popup__close {
+    top: -37px;
+    right: 0;
+    height: 20px;
+    width: 20px;
+  }
+}

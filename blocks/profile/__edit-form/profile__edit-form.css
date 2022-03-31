@@ -1,18 +1,28 @@
 .profile__edit-form {
   height: 50px;
   width: 150px;
+  margin: 0;
+  padding: 0;
   margin-top: 35px;
 
   border: 2px solid #fff;
   box-sizing: border-box;
   background: no-repeat center url(/images/edit-form.svg);
-  background-size: 22px 22px;
+  background-size: 22px;
+
+  cursor: pointer;
+  transition: opacity 0.5s linear;
 }
+
+.profile__edit-form:hover {
+  opacity: 0.6;
+}
+
 
 @media screen and (max-width: 767px) {
   .profile__edit-form {
     width: 282px;
     margin-top: 0;
-    background-size: 16px 16px;
+    background-size: 16px;
   }
 }

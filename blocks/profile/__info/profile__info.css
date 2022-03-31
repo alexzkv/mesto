@@ -7,10 +7,16 @@
   color: #fff;
 }
 
+@media screen and (max-width: 1023px) {
+  .profile__info {
+    margin: 22px 84px 25px 0;
+  }
+}
+
 @media screen and (max-width: 767px) {
   .profile__info {
     align-items: center;
     max-width: 282px;
-    margin: 26px 0 36px;
+    margin: 26px 0 32px;
   }
 }

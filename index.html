@@ -18,57 +18,77 @@
       <img src="./images/jacques-yves-cousteau.jpg" alt="Фото Жак-Ив Кусто" class="profile__avatar">
       <div class="profile__info">
         <h1 class="profile__info-title">Жак-Ив Кусто</h1>
-        <span class="profile__edit-button"></span>
+        <button type="button" aria-label="Редактировать профиль" class="profile__edit-button"></button>
         <p class="profile__info-subtitle">Исследователь океана</p>
       </div>
-      <span class="profile__edit-form"></span>
+      <button type="button" aria-label="Добавить элемент" class="profile__edit-form"></button>
     </section>
 
     <section class="elements">
-      <ul>
-        <li>
-          <img src="" alt="Шоанинский храм" class="">
-          <h2 class="elements__title">Карачаевск</h2>
-          <input id="toggle-heart" type="checkbox"/>
-          <label for="toggle-heart" aria-label="like">❤</label>
+      <ul class="element-grid">
+        <li class="element-grid__item">
+          <img src="./images/photo-karachayevsk.jpg" alt="Шоанинский храм" class="element-grid__img">
+          <div class="element-grid__description">
+            <h2 class="element-grid__title">Карачаевск</h2>
+            <button class="element-grid__button"></button>
+          </div>
         </li>
-        <li>
-          <img src="./images/photo-gora-elbrus.jpg" alt="Гора Эльбрус" class="">
-          <h2 class="elements__title">Гора Эльбрус</h2>
-          <input id="toggle-heart" type="checkbox"/>
-          <label for="toggle-heart" aria-label="like">❤</label>
+        <li class="element-grid__item">
+          <img src="./images/photo-gora-elbrus.jpg" alt="Гора Эльбрус" class="element-grid__img">
+          <div class="element-grid__description">
+            <h2 class="element-grid__title">Гора Эльбрус</h2>
+            <button class="element-grid__button"></button>
+          </div>
         </li>
-        <li>
-          <img src="./images/photo-dombai.jpg" alt="Домбай" class="">
-          <h2 class="elements__title">Домбай</h2>
-          <input id="toggle-heart" type="checkbox"/>
-          <label for="toggle-heart" aria-label="like">❤</label>
+        <li class="element-grid__item">
+          <img src="./images/photo-dombai.jpg" alt="Домбай" class="element-grid__img">
+          <div class="element-grid__description">
+            <h2 class="element-grid__title">Домбай</h2>
+            <button class="element-grid__button"></button>
+          </div>
         </li>
-        <li>
-          <img src="./images/photo-gora-elbrus.jpg" alt="Гора Эльбрус" class="">
-          <h2 class="elements__title">Гора Эльбрус</h2>
-          <input id="toggle-heart" type="checkbox"/>
-          <label for="toggle-heart" aria-label="like">❤</label>
+        <li class="element-grid__item">
+          <img src="./images/photo-altai.jpg" alt="Горный Алтай" class="element-grid__img">
+          <div class="element-grid__description">
+            <h2 class="element-grid__title">Горный Алтай</h2>
+            <button class="element-grid__button"></button>
+          </div>
         </li>
-        <li>
-          <img src="./images/photo-dombai.jpg" alt="Домбай" class="">
-          <h2 class="elements__title">Домбай</h2>
-          <input id="toggle-heart" type="checkbox"/>
-          <label for="toggle-heart" aria-label="like">❤</label>
+        <li class="element-grid__item">
+          <img src="./images/photo-kizhi.jpg" alt="Кижи" class="element-grid__img">
+          <div class="element-grid__description">
+            <h2 class="element-grid__title">Кижи</h2>
+            <button class="element-grid__button"></button>
+          </div>
         </li>
-        <li>
-          <img src="" alt="Шоанинский храм" class="">
-          <h2 class="elements__title">Карачаево-Ч...</h2>
-          <input id="toggle-heart" type="checkbox"/>
-          <label for="toggle-heart" aria-label="like">❤</label>
+        <li class="element-grid__item">
+          <img src="./images/photo-sufrudzhinsky-waterfalls.jpg" alt="Суфруджинские водопады" class="element-grid__img">
+          <div class="element-grid__description">
+            <h2 class="element-grid__title">Суфруджинские водопады</h2>
+            <button class="element-grid__button"></button>
+          </div>
         </li>
       </ul>
     </section>
-
   </main>
 
   <footer class="footer">
     <h3 class="footer__title">&#169; 2022 Mesto Russia</h3>
   </footer>
+
+  <div class="popup">
+    <div class="popup__container">
+      <button type="button" class="popup__close"></button>
+      <form name="edit" class="popup__form">
+        <h3 class="popup__title">Редактировать профиль</h3>
+        <input type="text" name="name" class="popup__input popup__input_name">
+        <input type="text" name="about" class="popup__input popup__input_about">
+        <button type="submit" class="popup__save-button">Сохранить</button>
+      </form>
+    </div>
+  </div>
+
+  <script src="./scripts/index.js"></script>
+
 </body>
 </html>
