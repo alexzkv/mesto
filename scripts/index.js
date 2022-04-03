@@ -8,14 +8,16 @@ let profileName = document.querySelector('.profile__info-title');
 let profileAbout = document.querySelector('.profile__info-subtitle');
 
 function openModalWindow() {
-  modalWindow.classList.add('popup_opened');
+  if (modalWindow.classList.add('popup_opened')); {
 
   nameInput.value = `${profileName.textContent}`;
   aboutInput.value = `${profileAbout.textContent}`;
+  }
 }
 
 function closeModalWindow() {
-  modalWindow.classList.remove('popup_opened');
+  if (modalWindow.classList.remove('popup_opened')); {
+  }
 }
 
 function formSubmitHandler (evt) {
@@ -34,5 +36,3 @@ editProfileBtn.addEventListener('click', openModalWindow);
 modalCloseBtn.addEventListener('click', function () {
   modalWindow.classList.remove('popup_opened');
 });
-
-
