@@ -1,7 +1,6 @@
 .element-grid__item {
   display: flex;
   flex-direction: column;
-  height: 361px;
   border-radius: 10px;
   background-color: #fff;
 }

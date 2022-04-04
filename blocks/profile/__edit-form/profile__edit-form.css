@@ -5,15 +5,16 @@
   padding: 0;
   margin-top: 35px;
   border: 2px solid #fff;
+  border-radius: 2px;
   box-sizing: border-box;
   background: no-repeat center url(../../../images/edit-form.svg);
   background-size: 22px;
   cursor: pointer;
-  transition: opacity 0.5s linear;
+  transition: opacity .5s linear;
 }
 
 .profile__edit-form:hover {
-  opacity: 0.6;
+  opacity: .6;
 }
 
 @media screen and (max-width: 767px) {

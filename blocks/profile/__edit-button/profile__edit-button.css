@@ -8,18 +8,18 @@
   background: no-repeat center url(../../../images/edit-button.svg);
   background-size: 10px;
   cursor: pointer;
-  transition: opacity 0.5s linear;
+  transition: opacity .5s linear;
 }
 
 .profile__edit-button:hover {
-  opacity: 0.6;
+  opacity: .6;
 }
 
 @media screen and (max-width: 767px) {
   .profile__edit-button {
     height: 18px;
     width: 18px;
-    margin-top: 3px;
+    margin-top: 1px;
     background-size: 7.5px;
   }
 }

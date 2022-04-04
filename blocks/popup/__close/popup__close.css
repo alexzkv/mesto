@@ -11,11 +11,11 @@
   background-size: 100%;
   border: 0;
   cursor: pointer;
-  transition: opacity 0.5s linear;
+  transition: opacity .5s linear;
 }
 
 .popup__close:hover {
-  opacity: 0.8;
+  opacity: .6;
 }
 
 @media screen and (max-width: 767px) {
