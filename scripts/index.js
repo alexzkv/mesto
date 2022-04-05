@@ -9,7 +9,7 @@ let profileAbout = document.querySelector('.profile__info-subtitle');
 
 //функция открытия popup
 function openModalWindow() {
-  if (modalWindow.classList.add('popup_opened')); {
+  modalWindow.classList.add('popup_opened'); {
 
   nameInput.value = `${profileName.textContent}`;
   aboutInput.value = `${profileAbout.textContent}`;
@@ -18,7 +18,7 @@ function openModalWindow() {
 
 // функция закрытия popup
 function closeModalWindow() {
-  if (modalWindow.classList.remove('popup_opened')); {
+  modalWindow.classList.remove('popup_opened'); {
   }
 }
 
