@@ -15,12 +15,15 @@
 @import url(../blocks/profile/__edit-form/profile__edit-form.css);
 
 @import url(../blocks/elements/elements.css);
+
 @import url(../blocks/element-grid/element-grid.css);
-@import url(../blocks/element-grid/__item/element-grid__item.css);
-@import url(../blocks/element-grid/__img/element-grid__img.css);
-@import url(../blocks/element-grid/__description/element-grid__description.css);
-@import url(../blocks/element-grid/__title/element-grid__title.css);
-@import url(../blocks/element-grid/__button/element-grid__button.css);
+
+@import url(../blocks/card/card.css);
+@import url(../blocks/card/__img/card__img.css);
+@import url(../blocks/card/__trash/card__trash.css);
+@import url(../blocks/card/__description/card__description.css);
+@import url(../blocks/card/__title/card__title.css);
+@import url(../blocks/card/__like/card__like.css);
 
 @import url(../blocks/popup/popup.css);
 @import url(../blocks/popup/_opened/popup_opened.css);
