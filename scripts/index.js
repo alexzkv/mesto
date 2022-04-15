@@ -1,39 +1,61 @@
+//переменные для профиля
+const popupProfile = document.querySelector('.popup_profile');
 const editProfileBtn = document.querySelector('.profile__edit-button');
-const modalWindow = document.querySelector('.popup');
-const modalCloseBtn = modalWindow.querySelector('.popup__close');
-const editNameInfo = document.querySelector('.popup__form');
-const nameInput = document.querySelector('.popup__input_text_name');
-const aboutInput = document.querySelector('.popup__input_text_about');
+const editNameInfo = document.querySelector('.popup__form-profile');
+const closePopupProfile = popupProfile.querySelector('.popup__close');
+const nameInputProfile = document.querySelector('.popup__input_profile_name');
+const aboutInputProfile = document.querySelector('.popup__input_profile_about');
 const profileName = document.querySelector('.profile__info-title');
 const profileAbout = document.querySelector('.profile__info-subtitle');
+
+//переменные для карточек
+const popupAddCard = document.querySelector('.popup_add-card');
+const addCardBtn = document.querySelector('.profile__add-card');
+const editNameCard = document.querySelector('.popup__form-card');
+const closePopupCard = popupAddCard.querySelector('.popup__close');
+const nameInputCard = document.querySelector('.popup__input_card_name');
+const linkInputCard = document.querySelector('.popup__input_card_link');
+
 const listContainer = document.querySelector('.element-grid');
 const cardTemplate = document.querySelector('.card-template');
 const initialCards = [
   {
     name: 'Москва-Сити',
-    link: 'https://images.pexels.com/photos/11676075/pexels-photo-11676075.jpeg?cs=srgb&dl=pexels-vladislav-serov-11676075.jpg&fm=jpg'
+    link: 'https://ia.wampi.ru/2022/04/14/moscow-city.jpg'
   },
   {
     name: 'Демерджи-яйла',
-    link: 'https://images.pexels.com/photos/11678557/pexels-photo-11678557.jpeg?cs=srgb&dl=pexels-tanya-kashtanova-11678557.jpg&fm=jpg'
+    link: 'https://ia.wampi.ru/2022/04/14/demerdzhi-yayla.jpg'
   },
   {
     name: 'Тиб',
-    link: 'https://images.pexels.com/photos/5652604/pexels-photo-5652604.jpeg?cs=srgb&dl=pexels-julia-volk-5652604.jpg&fm=jpg'
+    link: 'https://ie.wampi.ru/2022/04/14/tib.jpg'
   },
   {
     name: 'Коломенский дворец',
-    link: 'https://images.pexels.com/photos/2383860/pexels-photo-2383860.jpeg?cs=srgb&dl=pexels-artem-beliaikin-2383860.jpg&fm=jpg'
+    link: 'https://ie.wampi.ru/2022/04/14/kolomna-palace.jpg'
   },
   {
     name: 'Фиолент',
-    link: 'https://images.pexels.com/photos/8720843/pexels-photo-8720843.jpeg?cs=srgb&dl=pexels-mikhail-nilov-8720843.jpg&fm=jpg'
+    link: 'https://ie.wampi.ru/2022/04/14/fiolent.jpg'
   },
   {
     name: 'Кезенойам',
-    link: 'https://images.pexels.com/photos/3055497/pexels-photo-3055497.jpeg?cs=srgb&dl=pexels-boris-ulzibat-3055497.jpg&fm=jpg'
+    link: 'https://ia.wampi.ru/2022/04/14/kezenoyam.jpg'
   }
 ];
+
+//функция открытия popup
+function openModalWindow(popup) {
+  popup.classList.add('popup_opened'); {
+  }
+}
+
+// функция закрытия popup
+function closeModalWindow(popup) {
+  popup.classList.remove('popup_opened'); {
+  }
+}
 
 // функция отрисовки элементов template
 function render() {
@@ -41,47 +63,83 @@ function render() {
   listContainer.append(...drawingElements);
 }
 
-//функция наполнения содержим
+//функция наполнения содержимым
 function getElement(item) {
   const getElemenTemplate = cardTemplate.content.cloneNode(true);
   const link = getElemenTemplate.querySelector('.card__img');
+  const name = getElemenTemplate.querySelector('.card__title');
+  const removeButton = getElemenTemplate.querySelector('.card__trash');
+  const likeCardBtn = getElemenTemplate.querySelector('.card__like');
+
   link.src = item.link;
   link.alt = item.name;
-  const name = getElemenTemplate.querySelector('.card__title');
   name.textContent = item.name;
+
+  removeButton.addEventListener('click', removeCard);
+
+  likeCardBtn.addEventListener('click', function() {
+    likeCardBtn.classList.toggle('card__like_active')
+  });
 
   return getElemenTemplate;
 }
 
-render();
+//функкция кнопки открытия формы для добавления карточки
+addCardBtn.addEventListener('click', () => {
+  openModalWindow(popupAddCard);
+});
 
-//функция открытия popup
-function openModalWindow() {
-  modalWindow.classList.add('popup_opened'); {
+//функция добавления карточки
+function addCard(evt) {
+  const cardElement = getElement({name: nameInputCard.value, link: linkInputCard.value});
+  listContainer(cardElement);
 
-  nameInput.value = `${profileName.textContent}`;
-  aboutInput.value = `${profileAbout.textContent}`;
-  }
+  nameInputCard.value = '';
+  linkInputCard.value = '';
 }
 
-// функция закрытия popup
-function closeModalWindow() {
-  modalWindow.classList.remove('popup_opened'); {
-  }
-}
+//функкция кнопки закрытия формы для добавления карточки
+closePopupCard.addEventListener('click', () => {
+  closeModalWindow(popupAddCard);
+});
 
-//функция сохранения информации
-function saveProfile (evt) {
+//функция удаления карточки
+function removeCard(evt) {
+  const cardElement = evt.target.closest('.card');
+  cardElement.remove();
+ }
+
+ //функкция кнопки открытия редактирования профиля
+editProfileBtn.addEventListener('click', () => {
+  nameInputProfile.value = `${profileName.textContent}`;
+  aboutInputProfile.value = `${profileAbout.textContent}`;
+
+  openModalWindow(popupProfile);
+});
+
+ //функкция кнопки закрытия редактирования профиля
+closePopupProfile.addEventListener('click', () => {
+  closeModalWindow(popupProfile);
+});
+
+//функкция сохранения данных редактирования профиля
+editNameInfo.addEventListener('submit', evt => {
   evt.preventDefault();
 
-  profileName.textContent = nameInput.value;
-  profileAbout.textContent = aboutInput.value;
+  profileName.textContent = nameInputProfile.value;
+  profileAbout.textContent = aboutInputProfile.value;
 
-  closeModalWindow();
-}
+  closeModalWindow(popupProfile);
+});
 
-editNameInfo.addEventListener('submit', saveProfile);
+//функкция сохранения данных добавления карточки
+editNameCard.addEventListener('submit', evt => {
+  evt.preventDefault();
 
-editProfileBtn.addEventListener('click', openModalWindow);
+  closeModalWindow(popupAddCard);
+});
 
-modalCloseBtn.addEventListener('click', closeModalWindow);
+
+
+
+render();

@@ -1,4 +1,4 @@
-.profile__edit-form {
+.profile__add-card {
   height: 50px;
   width: 150px;
   margin: 0;
@@ -13,12 +13,12 @@
   transition: opacity .5s linear;
 }
 
-.profile__edit-form:hover {
+.profile__add-card:hover {
   opacity: .6;
 }
 
 @media screen and (max-width: 767px) {
-  .profile__edit-form {
+  .profile__add-card {
     width: 282px;
     margin-top: 0;
     background-size: 16px;
