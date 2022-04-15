@@ -13,8 +13,7 @@ const popupAddCard = document.querySelector('.popup_add-card');
 const addCardBtn = document.querySelector('.profile__add-card');
 const editNameCard = document.querySelector('.popup__form-card');
 const closePopupCard = popupAddCard.querySelector('.popup__close');
-const nameInputCard = document.querySelector('.popup__input_card_name');
-const linkInputCard = document.querySelector('.popup__input_card_link');
+
 
 const listContainer = document.querySelector('.element-grid');
 const cardTemplate = document.querySelector('.card-template');
@@ -91,12 +90,24 @@ addCardBtn.addEventListener('click', () => {
 
 //функция добавления карточки
 function addCard(evt) {
+  const nameInputCard = document.querySelector('.popup__input_card_name');
+  const linkInputCard = document.querySelector('.popup__input_card_link');
   const cardElement = getElement({name: nameInputCard.value, link: linkInputCard.value});
-  listContainer(cardElement);
+  listContainer.prepend(cardElement);
 
   nameInputCard.value = '';
   linkInputCard.value = '';
 }
+
+//функкция сохранения данных добавления карточки
+editNameCard.addEventListener('submit', evt => {
+  evt.preventDefault();
+
+  closeModalWindow(popupAddCard);
+
+  addCard();
+});
+
 
 //функкция кнопки закрытия формы для добавления карточки
 closePopupCard.addEventListener('click', () => {
@@ -131,15 +142,5 @@ editNameInfo.addEventListener('submit', evt => {
 
   closeModalWindow(popupProfile);
 });
-
-//функкция сохранения данных добавления карточки
-editNameCard.addEventListener('submit', evt => {
-  evt.preventDefault();
-
-  closeModalWindow(popupAddCard);
-});
-
-
-
 
 render();
