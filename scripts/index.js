@@ -15,6 +15,8 @@ const editNameCard = popupAddCard.querySelector('.popup__form-card');
 const closePopupCard = popupAddCard.querySelector('.popup__close');
 const listContainer = document.querySelector('.element-grid');
 const cardTemplate = document.querySelector('.card-template');
+const nameInputCard = document.querySelector('.popup__input_card_name');
+const linkInputCard = document.querySelector('.popup__input_card_link');
 
 //переменные для большой карточки
 const popupOpenCard = document.querySelector('.popup_open-card'); //
@@ -104,8 +106,7 @@ function getElement(item) {
 
 //функция добавления карточки
 function addCard(evt) {
-  const nameInputCard = document.querySelector('.popup__input_card_name');
-  const linkInputCard = document.querySelector('.popup__input_card_link');
+
   const cardElement = getElement({name: nameInputCard.value, link: linkInputCard.value});
 
   listContainer.prepend(cardElement);
