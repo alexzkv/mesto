@@ -13,10 +13,12 @@ const popupAddCard = document.querySelector('.popup_add-card');
 const addCardBtn = document.querySelector('.profile__add-card');
 const editNameCard = document.querySelector('.popup__form-card');
 const closePopupCard = popupAddCard.querySelector('.popup__close');
-
-
 const listContainer = document.querySelector('.element-grid');
 const cardTemplate = document.querySelector('.card-template');
+
+const cardOpen = document.querySelector('.popup_open-card');
+const cardClose = document.querySelector('.popup__close');
+
 const initialCards = [
   {
     name: 'Москва-Сити',
@@ -56,7 +58,12 @@ function closeModalWindow(popup) {
   }
 }
 
-// функция отрисовки элементов template
+//функция кнопки открытия формы для добавления карточки
+addCardBtn.addEventListener('click', () => {
+  openModalWindow(popupAddCard);
+});
+
+// функция отрисовки элементов
 function render() {
   const drawingElements = initialCards.map(getElement);
   listContainer.append(...drawingElements);
@@ -83,11 +90,6 @@ function getElement(item) {
   return getElemenTemplate;
 }
 
-//функкция кнопки открытия формы для добавления карточки
-addCardBtn.addEventListener('click', () => {
-  openModalWindow(popupAddCard);
-});
-
 //функция добавления карточки
 function addCard(evt) {
   const nameInputCard = document.querySelector('.popup__input_card_name');
@@ -99,7 +101,7 @@ function addCard(evt) {
   linkInputCard.value = '';
 }
 
-//функкция сохранения данных добавления карточки
+//функкция сохранения данных при добавлении карточки
 editNameCard.addEventListener('submit', evt => {
   evt.preventDefault();
 
@@ -107,7 +109,6 @@ editNameCard.addEventListener('submit', evt => {
 
   addCard();
 });
-
 
 //функкция кнопки закрытия формы для добавления карточки
 closePopupCard.addEventListener('click', () => {
