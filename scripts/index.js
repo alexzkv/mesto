@@ -1,7 +1,7 @@
 //переменные для профиля
 const popupProfile = document.querySelector('.popup_profile');
-const editProfileBtn = document.querySelector('.profile__edit-button');
-const editNameInfo = popupProfile.querySelector('.popup__form-profile');
+const btnEditProfile = document.querySelector('.profile__edit-button');
+const formEditProfile = popupProfile.querySelector('.popup__form');
 const closePopupProfile = popupProfile.querySelector('.popup__close');
 const nameInputProfile = popupProfile.querySelector('.popup__input_profile_name');
 const aboutInputProfile = popupProfile.querySelector('.popup__input_profile_about');
@@ -10,8 +10,8 @@ const profileAbout = document.querySelector('.profile__info-subtitle');
 
 //переменные для карточек
 const popupAddCard = document.querySelector('.popup_add-card');
-const addCardBtn = document.querySelector('.profile__add-card');
-const editNameCard = popupAddCard.querySelector('.popup__form-card');
+const btnAddCard = document.querySelector('.profile__add-card');
+const formEditCard = popupAddCard.querySelector('.popup__form');
 const closePopupCard = popupAddCard.querySelector('.popup__close');
 const listContainer = document.querySelector('.element-grid');
 const cardTemplate = document.querySelector('.card-template');
@@ -19,9 +19,9 @@ const nameInputCard = document.querySelector('.popup__input_card_name');
 const linkInputCard = document.querySelector('.popup__input_card_link');
 
 //переменные для большой карточки
-const popupOpenCard = document.querySelector('.popup_open-card'); //
-const bigCard = popupOpenCard.querySelector('.popup__image');         //
-const bigCardTitle = popupOpenCard.querySelector('.popup__image-title'); //
+const popupOpenCard = document.querySelector('.popup_open-card');
+const bigCard = popupOpenCard.querySelector('.popup__image');
+const bigCardTitle = popupOpenCard.querySelector('.popup__image-title');
 const closePopupBigCard = popupOpenCard.querySelector('.popup__close');
 
 const initialCards = [
@@ -53,18 +53,16 @@ const initialCards = [
 
 //функция открытия popup
 function openModalWindow(popup) {
-  popup.classList.add('popup_opened'); {
-  }
+  popup.classList.add('popup_opened');
 }
 
 // функция закрытия popup
 function closeModalWindow(popup) {
-  popup.classList.remove('popup_opened'); {
-  }
+  popup.classList.remove('popup_opened');
 }
 
 //функция кнопки открытия формы для добавления карточки
-addCardBtn.addEventListener('click', () => {
+btnAddCard.addEventListener('click', () => {
   openModalWindow(popupAddCard);
 });
 
@@ -81,46 +79,33 @@ function getElement(item) {
   const name = getElemenTemplate.querySelector('.card__title');
   const removeButton = getElemenTemplate.querySelector('.card__trash');
   const likeCardBtn = getElemenTemplate.querySelector('.card__like');
-
   link.src = item.link;
   link.alt = item.name;
   name.textContent = item.name;
-
   removeButton.addEventListener('click', removeCard);
-
-  likeCardBtn.addEventListener('click', function() {
+  likeCardBtn.addEventListener('click', () => {
     likeCardBtn.classList.toggle('card__like_active')
   });
-
-  link.addEventListener('click', function() {
-
+  link.addEventListener('click', () => {
     bigCard.src = link.src;
     bigCard.alt = link.alt;
     bigCardTitle.textContent = name.textContent;
-
     openModalWindow(popupOpenCard);
   });
-
   return getElemenTemplate;
 }
 
 //функция добавления карточки
 function addCard(evt) {
-
   const cardElement = getElement({name: nameInputCard.value, link: linkInputCard.value});
-
   listContainer.prepend(cardElement);
-
-  nameInputCard.value = '';
-  linkInputCard.value = '';
+  formEditCard.reset();
 }
 
 //функкция сохранения данных при добавлении карточки
-editNameCard.addEventListener('submit', evt => {
+formEditCard.addEventListener('submit', evt => {
   evt.preventDefault();
-
   closeModalWindow(popupAddCard);
-
   addCard();
 });
 
@@ -136,10 +121,9 @@ function removeCard(evt) {
  }
 
  //функкция кнопки открытия редактирования профиля
-editProfileBtn.addEventListener('click', () => {
+ btnEditProfile.addEventListener('click', () => {
   nameInputProfile.value = `${profileName.textContent}`;
   aboutInputProfile.value = `${profileAbout.textContent}`;
-
   openModalWindow(popupProfile);
 });
 
@@ -149,12 +133,10 @@ closePopupProfile.addEventListener('click', () => {
 });
 
 //функкция сохранения данных редактирования профиля
-editNameInfo.addEventListener('submit', evt => {
+formEditProfile.addEventListener('submit', evt => {
   evt.preventDefault();
-
   profileName.textContent = nameInputProfile.value;
   profileAbout.textContent = aboutInputProfile.value;
-
   closeModalWindow(popupProfile);
 });
 

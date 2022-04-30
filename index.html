@@ -49,19 +49,48 @@
   <div class="popup popup_profile">
     <div class="popup__container">
       <button  type="button" aria-label="Закрыть форму" class="popup__close"></button>
-      <form name="edit-form" class="popup__form-profile">
+      <form novalidate name="edit-form" class="popup__form">
         <p class="popup__title">Редактировать профиль</p>
-        <input type="text" name="profile-name" class="popup__input popup__input_profile_name">
-        <input type="text" name="profile-about" class="popup__input popup__input_profile_about">
+        <input
+          placeholder="Имя"
+          required
+          minlength="2"
+          maxlength="40"
+          type="text"
+          id="input-name"
+          name="profile-name"
+          class="popup__input popup__input_profile_name"
+        >
+        <span id="input-name-error" class="popup__error"></span>
+        <input
+          placeholder="О себе"
+          required
+          minlength="2"
+          maxlength="200"
+          type="text"
+          id="input-about"
+          name="profile-about"
+          class="popup__input popup__input_profile_about"
+        >
+        <span  id="input-about-error" class="popup__error"></span>
         <button  type="submit" aria-label="Сохранить" class="popup__save-button">Сохранить</button>
       </form>
     </div>
   </div>
 
+
+
+
+
+
+
+
+
+
   <div class="popup popup_add-card">
     <div class="popup__container">
       <button  type="button" aria-label="Закрыть форму" class="popup__close"></button>
-      <form name="add-card" class="popup__form-card">
+      <form name="add-card" class="popup__form">
         <p class="popup__title">Новое место</p>
         <input type="text" name="card-name" placeholder="Название" class="popup__input popup__input_card_name">
         <input type="text" name="card-link" placeholder="Ссылка на картинку" class="popup__input popup__input_card_link">
@@ -81,6 +110,7 @@
   </div>
 
   <script src="./scripts/index.js"></script>
+  <script src="./scripts/validate.js"></script>
 
 </body>
 </html>
