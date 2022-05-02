@@ -1,8 +1,10 @@
 const config = {
   formSelector: '.popup__form',
   inputSelector: '.popup__input',
+  submitButtonSelector: '.popup__save-button',
   inputErrorClass: 'popup__input_type_error',
-  errorClass: 'popup__error_visible'
+  errorClass: 'popup__error_visible',
+  inactiveButtonClass: 'popup__save-button_disabled',
 }
 
 const showInputError = (inputElement, inputErrorClass, errorClass) => {
@@ -30,8 +32,9 @@ const checkInputValidity = (formElement, inputElement, config) => {
 const setEventListeners = (formElement, config) => {
   const inputList = Array.from(formElement.querySelectorAll(config.inputSelector));
   inputList.forEach((inputElement) => {
-    inputElement.addEventListener('input', function () {
+    inputElement.addEventListener('input', () => {
       checkInputValidity(formElement, inputElement, config);
+      // toggleButton(formElement, config, inputList);
     });
   });
 }
@@ -45,6 +48,36 @@ const enableValidation = (config) => {
     setEventListeners(formElement, config);
   });
 }
+
+const hasInvalidInput = (inputList) => {
+  return inputList.some((inputElement) => {
+    return !inputElement.validity.valid;
+  });
+}
+
+// const toggleButton = (formElement, config) => {
+//   const button = document.querySelector(config.submitButtonSelector);
+//   button.disabled = !formElement.checkInputValidity();
+//   button.classList.toggle(inactiveButtonClass, !formElement.checkInputValidity());
+// }
+
+const removeError = (popup, config) => {
+  const inputsModal = Array.from(popup.querySelectorAll(config.inputSelector));
+  inputsModal.forEach((inputElement) => {
+  hideInputError(inputElement, config.inputErrorClass, config.errorClass);
+  });
+}
+
+// const toggleButtonState = (inputList, buttonElement, inactiveButtonClass) => {
+//   if(hasInvalidInput(inputList)) {
+//     buttonElement.classList.add(inactiveButtonClass);
+//     buttonElement.setAttribute("disabled", "");
+//   } else {
+//     buttonElement.classList.remove(inactiveButtonClass);
+//     buttonElement.removeAttribute("disabled", "");
+//   }
+// }
+
 enableValidation(config);
 
 

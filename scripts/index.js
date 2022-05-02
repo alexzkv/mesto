@@ -54,11 +54,15 @@ const initialCards = [
 //функция открытия popup
 function openModalWindow(popup) {
   popup.classList.add('popup_opened');
+  document.addEventListener('click', closeByOverlay);
+  document.addEventListener('keydown', closeByEsc);
 }
 
 // функция закрытия popup
 function closeModalWindow(popup) {
   popup.classList.remove('popup_opened');
+  document.removeEventListener('click', closeByOverlay);
+  document.removeEventListener('keydown', closeByEsc);
 }
 
 //функция кнопки открытия формы для добавления карточки
@@ -144,5 +148,18 @@ formEditProfile.addEventListener('submit', evt => {
  closePopupBigCard.addEventListener('click', () => {
   closeModalWindow(popupOpenCard);
 });
+
+function closeByEsc(evt) {
+  if (evt.key === 'Escape') {
+    const popupOpened = document.querySelector('.popup_opened');
+    closeModalWindow(popupOpened);
+  }
+}
+
+function closeByOverlay(evt) {
+  if (evt.target.classList.contains('popup_opened')) {
+    closeModalWindow(evt.target);
+  }
+}
 
 render();
