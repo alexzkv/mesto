@@ -1,5 +1,5 @@
 .profile__info-title {
-  max-width: 294px;
+  width: 294px;
   margin: 0;
   padding: 0;
   margin-right: 18px;
@@ -13,7 +13,7 @@
 
 @media screen and (max-width: 767px) {
   .profile__info-title {
-    max-width: 189px;
+    width: 189px;
     margin-right: 10px;
     margin-left: 46px;
     font-size: 27px;

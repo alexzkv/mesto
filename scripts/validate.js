@@ -32,6 +32,7 @@ const checkInputValidity = (formElement, inputElement, config) => {
 const setEventListeners = (formElement, config) => {
   const inputList = Array.from(formElement.querySelectorAll(config.inputSelector));
   const buttonElement = formElement.querySelector(config.submitButtonSelector);
+  toggleButtonState(inputList, buttonElement, config.inactiveButtonClass);
   inputList.forEach((inputElement) => {
     inputElement.addEventListener('input', () => {
       checkInputValidity(formElement, inputElement, config);
@@ -74,7 +75,7 @@ const enableSubmitButton = (buttonElement, inactiveButtonClass) => {
   buttonElement.removeAttribute('disabled', "");
 }
 //функция очистки валидации
-const clearError = (popup, config) => {
+const clearError = (popup, config, disableSubmitButton) => {
   const inputList = Array.from(popup.querySelectorAll(config.inputSelector));
   const formElement = popup.querySelector(config.formSelector);
   inputList.forEach((inputElement) => {

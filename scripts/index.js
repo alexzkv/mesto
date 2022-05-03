@@ -2,26 +2,26 @@
 const popupProfile = document.querySelector('.popup_profile');
 const btnEditProfile = document.querySelector('.profile__edit-button');
 const formEditProfile = popupProfile.querySelector('.popup__form');
-const closePopupProfile = popupProfile.querySelector('.popup__close');
-const nameInputProfile = popupProfile.querySelector('.popup__input_profile_name');
-const aboutInputProfile = popupProfile.querySelector('.popup__input_profile_about');
+const closingPopupProfile = popupProfile.querySelector('.popup__close');
+const inputNameProfile = popupProfile.querySelector('.popup__input_profile_name');
+const inputAboutProfile = popupProfile.querySelector('.popup__input_profile_about');
 const profileName = document.querySelector('.profile__info-title');
 const profileAbout = document.querySelector('.profile__info-subtitle');
 //переменные для карточек
 const popupAddCard = document.querySelector('.popup_add-card');
 const btnAddCard = document.querySelector('.profile__add-card');
 const formEditCard = popupAddCard.querySelector('.popup__form');
-const closePopupCard = popupAddCard.querySelector('.popup__close');
+const closingPopupCard = popupAddCard.querySelector('.popup__close');
 const listContainer = document.querySelector('.element-grid');
 const cardTemplate = document.querySelector('.card-template');
 const nameInputCard = document.querySelector('.popup__input_card_name');
 const linkInputCard = document.querySelector('.popup__input_card_link');
 //переменные для большой карточки
 const popupOpenCard = document.querySelector('.popup_open-card');
-const bigCard = popupOpenCard.querySelector('.popup__image');
-const bigCardTitle = popupOpenCard.querySelector('.popup__image-title');
-const closePopupBigCard = popupOpenCard.querySelector('.popup__close');
-const initialCards = [
+const cardBig = popupOpenCard.querySelector('.popup__image');
+const cardBigTitle = popupOpenCard.querySelector('.popup__image-title');
+const closingPopupBigCard = popupOpenCard.querySelector('.popup__close');
+const cardObject = [
   {
     name: 'Москва-Сити',
     link: 'https://ia.wampi.ru/2022/04/14/moscow-city.jpg'
@@ -50,14 +50,13 @@ const initialCards = [
 //функция открытия popup
 function openModalWindow(popup) {
   popup.classList.add('popup_opened');
-  document.addEventListener('click', closeByOverlay);
+  popup.addEventListener('mousedown', closeByOverlay);
   document.addEventListener('keydown', closeByEsc);
-  clearError(popup, config);
 }
 // функция закрытия popup
 function closeModalWindow(popup) {
   popup.classList.remove('popup_opened');
-  document.removeEventListener('click', closeByOverlay);
+  popup.removeEventListener('mousedown', closeByOverlay);
   document.removeEventListener('keydown', closeByEsc);
 }
 //функция закрытия на esc
@@ -69,40 +68,42 @@ function closeByEsc(evt) {
 }
 //функция закрытия на overlay
 function closeByOverlay(evt) {
-  if (evt.target.classList.contains('popup_opened')) {
+  if (evt.target) {
+    const popupOpened = document.querySelector('.popup_opened');
     closeModalWindow(evt.target);
   }
 }
 //функция кнопки открытия формы для добавления карточки
 btnAddCard.addEventListener('click', () => {
+  clearError(popupAddCard, config, disableSubmitButton);
   openModalWindow(popupAddCard);
 });
 // функция отрисовки элементов
 function render() {
-  const drawingElements = initialCards.map(getElement);
+  const drawingElements = cardObject.map(getElement);
   listContainer.append(...drawingElements);
 }
 //функция наполнения содержимым
 function getElement(item) {
-  const getElemenTemplate = cardTemplate.content.cloneNode(true);
-  const link = getElemenTemplate.querySelector('.card__img');
-  const name = getElemenTemplate.querySelector('.card__title');
-  const removeButton = getElemenTemplate.querySelector('.card__trash');
-  const likeCardBtn = getElemenTemplate.querySelector('.card__like');
+  const elementTemplate = cardTemplate.content.cloneNode(true);
+  const link = elementTemplate.querySelector('.card__img');
+  const name = elementTemplate.querySelector('.card__title');
+  const btnRemove = elementTemplate.querySelector('.card__trash');
+  const btnCardLike = elementTemplate.querySelector('.card__like');
   link.src = item.link;
   link.alt = item.name;
   name.textContent = item.name;
-  removeButton.addEventListener('click', removeCard);
-  likeCardBtn.addEventListener('click', () => {
-    likeCardBtn.classList.toggle('card__like_active')
+  btnRemove.addEventListener('click', removeCard);
+  btnCardLike.addEventListener('click', () => {
+    btnCardLike.classList.toggle('card__like_active')
   });
   link.addEventListener('click', () => {
-    bigCard.src = link.src;
-    bigCard.alt = link.alt;
-    bigCardTitle.textContent = name.textContent;
+    cardBig.src = link.src;
+    cardBig.alt = link.alt;
+    cardBigTitle.textContent = name.textContent;
     openModalWindow(popupOpenCard);
   });
-  return getElemenTemplate;
+  return elementTemplate;
 }
 //функция добавления карточки
 function addCard(evt) {
@@ -117,7 +118,7 @@ formEditCard.addEventListener('submit', evt => {
   addCard();
 });
 //функция кнопки закрытия формы добавления карточки
-closePopupCard.addEventListener('click', () => {
+closingPopupCard.addEventListener('click', () => {
   closeModalWindow(popupAddCard);
 });
 //функция удаления карточки
@@ -127,23 +128,24 @@ function removeCard(evt) {
  }
  //функкция кнопки открытия редактирования профиля
  btnEditProfile.addEventListener('click', () => {
-  nameInputProfile.value = `${profileName.textContent}`;
-  aboutInputProfile.value = `${profileAbout.textContent}`;
+  inputNameProfile.value = `${profileName.textContent}`;
+  inputAboutProfile.value = `${profileAbout.textContent}`;
+  clearError(popupProfile, config, disableSubmitButton);
   openModalWindow(popupProfile);
 });
  //функкция кнопки закрытия редактирования профиля
-closePopupProfile.addEventListener('click', () => {
+closingPopupProfile.addEventListener('click', () => {
   closeModalWindow(popupProfile);
 });
 //функкция сохранения данных редактирования профиля
 formEditProfile.addEventListener('submit', evt => {
   evt.preventDefault();
-  profileName.textContent = nameInputProfile.value;
-  profileAbout.textContent = aboutInputProfile.value;
+  profileName.textContent = inputNameProfile.value;
+  profileAbout.textContent = inputAboutProfile.value;
   closeModalWindow(popupProfile);
 });
  //функкция кнопки закрытия большой карточки
- closePopupBigCard.addEventListener('click', () => {
+ closingPopupBigCard.addEventListener('click', () => {
   closeModalWindow(popupOpenCard);
 });
 render();
