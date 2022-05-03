@@ -23,7 +23,6 @@ const popupOpenCard = document.querySelector('.popup_open-card');
 const bigCard = popupOpenCard.querySelector('.popup__image');
 const bigCardTitle = popupOpenCard.querySelector('.popup__image-title');
 const closePopupBigCard = popupOpenCard.querySelector('.popup__close');
-
 const initialCards = [
   {
     name: 'Москва-Сити',
@@ -56,6 +55,7 @@ function openModalWindow(popup) {
   popup.classList.add('popup_opened');
   document.addEventListener('click', closeByOverlay);
   document.addEventListener('keydown', closeByEsc);
+  removeError (popup, config);
 }
 
 // функция закрытия popup
@@ -63,6 +63,19 @@ function closeModalWindow(popup) {
   popup.classList.remove('popup_opened');
   document.removeEventListener('click', closeByOverlay);
   document.removeEventListener('keydown', closeByEsc);
+}
+
+function closeByEsc(evt) {
+  if (evt.key === 'Escape') {
+    const popupOpened = document.querySelector('.popup_opened');
+    closeModalWindow(popupOpened);
+  }
+}
+
+function closeByOverlay(evt) {
+  if (evt.target.classList.contains('popup_opened')) {
+    closeModalWindow(evt.target);
+  }
 }
 
 //функция кнопки открытия формы для добавления карточки
@@ -148,18 +161,5 @@ formEditProfile.addEventListener('submit', evt => {
  closePopupBigCard.addEventListener('click', () => {
   closeModalWindow(popupOpenCard);
 });
-
-function closeByEsc(evt) {
-  if (evt.key === 'Escape') {
-    const popupOpened = document.querySelector('.popup_opened');
-    closeModalWindow(popupOpened);
-  }
-}
-
-function closeByOverlay(evt) {
-  if (evt.target.classList.contains('popup_opened')) {
-    closeModalWindow(evt.target);
-  }
-}
 
 render();
