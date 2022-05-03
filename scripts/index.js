@@ -7,7 +7,6 @@ const nameInputProfile = popupProfile.querySelector('.popup__input_profile_name'
 const aboutInputProfile = popupProfile.querySelector('.popup__input_profile_about');
 const profileName = document.querySelector('.profile__info-title');
 const profileAbout = document.querySelector('.profile__info-subtitle');
-
 //переменные для карточек
 const popupAddCard = document.querySelector('.popup_add-card');
 const btnAddCard = document.querySelector('.profile__add-card');
@@ -17,7 +16,6 @@ const listContainer = document.querySelector('.element-grid');
 const cardTemplate = document.querySelector('.card-template');
 const nameInputCard = document.querySelector('.popup__input_card_name');
 const linkInputCard = document.querySelector('.popup__input_card_link');
-
 //переменные для большой карточки
 const popupOpenCard = document.querySelector('.popup_open-card');
 const bigCard = popupOpenCard.querySelector('.popup__image');
@@ -49,46 +47,41 @@ const initialCards = [
     link: 'https://ia.wampi.ru/2022/04/14/kezenoyam.jpg'
   }
 ];
-
 //функция открытия popup
 function openModalWindow(popup) {
   popup.classList.add('popup_opened');
   document.addEventListener('click', closeByOverlay);
   document.addEventListener('keydown', closeByEsc);
-  removeError (popup, config);
+  clearError(popup, config);
 }
-
 // функция закрытия popup
 function closeModalWindow(popup) {
   popup.classList.remove('popup_opened');
   document.removeEventListener('click', closeByOverlay);
   document.removeEventListener('keydown', closeByEsc);
 }
-
+//функция закрытия на esc
 function closeByEsc(evt) {
   if (evt.key === 'Escape') {
     const popupOpened = document.querySelector('.popup_opened');
     closeModalWindow(popupOpened);
   }
 }
-
+//функция закрытия на overlay
 function closeByOverlay(evt) {
   if (evt.target.classList.contains('popup_opened')) {
     closeModalWindow(evt.target);
   }
 }
-
 //функция кнопки открытия формы для добавления карточки
 btnAddCard.addEventListener('click', () => {
   openModalWindow(popupAddCard);
 });
-
 // функция отрисовки элементов
 function render() {
   const drawingElements = initialCards.map(getElement);
   listContainer.append(...drawingElements);
 }
-
 //функция наполнения содержимым
 function getElement(item) {
   const getElemenTemplate = cardTemplate.content.cloneNode(true);
@@ -111,44 +104,37 @@ function getElement(item) {
   });
   return getElemenTemplate;
 }
-
 //функция добавления карточки
 function addCard(evt) {
   const cardElement = getElement({name: nameInputCard.value, link: linkInputCard.value});
   listContainer.prepend(cardElement);
   formEditCard.reset();
 }
-
 //функкция сохранения данных при добавлении карточки
 formEditCard.addEventListener('submit', evt => {
   evt.preventDefault();
   closeModalWindow(popupAddCard);
   addCard();
 });
-
 //функция кнопки закрытия формы добавления карточки
 closePopupCard.addEventListener('click', () => {
   closeModalWindow(popupAddCard);
 });
-
 //функция удаления карточки
 function removeCard(evt) {
   const cardElement = evt.target.closest('.card');
   cardElement.remove();
  }
-
  //функкция кнопки открытия редактирования профиля
  btnEditProfile.addEventListener('click', () => {
   nameInputProfile.value = `${profileName.textContent}`;
   aboutInputProfile.value = `${profileAbout.textContent}`;
   openModalWindow(popupProfile);
 });
-
  //функкция кнопки закрытия редактирования профиля
 closePopupProfile.addEventListener('click', () => {
   closeModalWindow(popupProfile);
 });
-
 //функкция сохранения данных редактирования профиля
 formEditProfile.addEventListener('submit', evt => {
   evt.preventDefault();
@@ -156,10 +142,8 @@ formEditProfile.addEventListener('submit', evt => {
   profileAbout.textContent = aboutInputProfile.value;
   closeModalWindow(popupProfile);
 });
-
  //функкция кнопки закрытия большой карточки
  closePopupBigCard.addEventListener('click', () => {
   closeModalWindow(popupOpenCard);
 });
-
 render();
