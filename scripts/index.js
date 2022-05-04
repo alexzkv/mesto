@@ -75,6 +75,8 @@ function closeByOverlay(evt) {
 }
 //функция кнопки открытия формы для добавления карточки
 btnAddCard.addEventListener('click', () => {
+  const submitBtn = popupAddCard.querySelector('.popup__save-button');
+  disableSubmitButton(submitBtn, config.inactiveButtonClass);
   clearError(popupAddCard, config, disableSubmitButton);
   openModalWindow(popupAddCard);
 });
@@ -111,7 +113,7 @@ function addCard(evt) {
   listContainer.prepend(cardElement);
   formEditCard.reset();
 }
-//функкция сохранения данных при добавлении карточки
+//функция сохранения данных при добавлении карточки
 formEditCard.addEventListener('submit', evt => {
   evt.preventDefault();
   closeModalWindow(popupAddCard);
@@ -126,25 +128,25 @@ function removeCard(evt) {
   const cardElement = evt.target.closest('.card');
   cardElement.remove();
  }
- //функкция кнопки открытия редактирования профиля
+ //функция кнопки открытия редактирования профиля
  btnEditProfile.addEventListener('click', () => {
   inputNameProfile.value = `${profileName.textContent}`;
   inputAboutProfile.value = `${profileAbout.textContent}`;
   clearError(popupProfile, config, disableSubmitButton);
   openModalWindow(popupProfile);
 });
- //функкция кнопки закрытия редактирования профиля
+ //функция кнопки закрытия редактирования профиля
 closingPopupProfile.addEventListener('click', () => {
   closeModalWindow(popupProfile);
 });
-//функкция сохранения данных редактирования профиля
+//функция сохранения данных редактирования профиля
 formEditProfile.addEventListener('submit', evt => {
   evt.preventDefault();
   profileName.textContent = inputNameProfile.value;
   profileAbout.textContent = inputAboutProfile.value;
   closeModalWindow(popupProfile);
 });
- //функкция кнопки закрытия большой карточки
+ //функция кнопки закрытия большой карточки
  closingPopupBigCard.addEventListener('click', () => {
   closeModalWindow(popupOpenCard);
 });
