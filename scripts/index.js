@@ -68,9 +68,8 @@ function closeByEsc(evt) {
 }
 //функция закрытия на overlay
 function closeByOverlay(evt) {
-  if (evt.target) {
-    const popupOpened = document.querySelector('.popup_opened');
-    closeModalWindow(evt.target);
+  if (evt.target.classList.contains('popup') || evt.target.classList.contains('popup__close')) {
+    closeModalWindow(evt.currentTarget)
   }
 }
 //функция кнопки открытия формы для добавления карточки
