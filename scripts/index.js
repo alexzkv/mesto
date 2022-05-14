@@ -1,3 +1,6 @@
+import { Card } from './Card.js';
+//import {FormValidator } from './FormValidator.js';
+
 //переменные для профиля
 const popupProfile = document.querySelector('.popup_profile');
 const btnEditProfile = document.querySelector('.profile__edit-button');
@@ -46,7 +49,7 @@ const cardObject = [
     name: 'Кезенойам',
     link: 'https://ia.wampi.ru/2022/04/14/kezenoyam.jpg'
   }
-];
+]
 //функция открытия popup
 function openModalWindow(popup) {
   popup.classList.add('popup_opened');
@@ -150,3 +153,8 @@ formEditProfile.addEventListener('submit', evt => {
   closeModalWindow(popupOpenCard);
 });
 render();
+
+
+
+
+//здесь оставляем создание новых карточек и вставляем их на страницу
