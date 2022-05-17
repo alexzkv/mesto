@@ -1,11 +1,42 @@
 export class Card {
-  //здесь переменные из которых состоит карточк
-  constructor(item, elementTemplate) {
-    this._name = item._name;
+  constructor(item, cardSelector, handlePhotoClick) {
+    this._name = item.name;
     this._link = item.link;
-    this._elementTemplate = elementTemplate;
+    this._cardSelector = cardSelector;
+    this._handlePhotoClick = handlePhotoClick;
   }
-//здесь будут методы-все действия с карточкой
 
+_getTemplate() {
+  const cardElement = document
+    .querySelector(this._cardSelector)
+    .content
+    .querySelector('.card')
+    .cloneNode(true);
+  return cardElement;
 }
 
+_handleDeleteCard = (evt) => {
+  this._card = evt.target.closest('.card');
+  this._card.remove();
+}
+
+_handleLikeCard = () => {
+  this._btnCardLike.classList.toggle('card__like_active');
+}
+
+generateCard() {
+  this._card = this._getTemplate();
+  this._btnCardLike = this._card.querySelector('.card__like');
+  this._cardImg = this._card.querySelector('.card__img');
+  this._cardImg.src= this._link;
+  this._cardImg.alt= this._name;
+  this._card.querySelector('.card__title').textContent = this._name;
+  this._btnCardLike.addEventListener('click', this._handleLikeCard);
+  this._card.querySelector('.card__delete')
+    .addEventListener('click', this._handleDeleteCard);
+  this._cardImg.addEventListener('click',
+    () => this._handlePhotoClick(
+    {name: this._name, link: this._link}));
+  return this._card;
+  }
+}

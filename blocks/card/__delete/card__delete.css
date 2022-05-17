@@ -1,4 +1,4 @@
-.card__trash {
+.card__delete {
   position: absolute;
   top: 20px;
   right: 20px;
@@ -12,7 +12,7 @@
   transition: opacity .5s linear;
 }
 
-.card__trash:hover {
+.card__delete:hover {
   opacity: .5;
 }
 
