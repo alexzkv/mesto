@@ -116,17 +116,15 @@ formEditCard.addEventListener('submit', evt => {
 //функция открытия формы для добавления карточки
 btnAddCard.addEventListener('click', () => {
   const submitBtn = popupAddCard.querySelector('.popup__save-button');
-  disableSubmitButton(submitBtn, config.inactiveButtonClass);
-  cardFormValidator(config, formEditCard);
-  clearError(popupAddCard, config, disableSubmitButton);
+  cardFormValidator.disableSubmitButton(config.inactiveButtonClass, submitBtn);
+  cardFormValidator.clearError(config, popupAddCard);
   openModalWindow(popupAddCard);
 });
  //функция открытия редактирования профиля
  btnEditProfile.addEventListener('click', () => {
   inputNameProfile.value = `${profileName.textContent}`;
   inputAboutProfile.value = `${profileAbout.textContent}`;
-  profileFormValidator(config, formEditProfile);
-  clearError(popupProfile, config, disableSubmitButton);
+  profileFormValidator.clearError(config, popupProfile);
   openModalWindow(popupProfile);
 });
  //функция закрытия редактирования профиля
