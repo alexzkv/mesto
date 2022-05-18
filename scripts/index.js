@@ -10,20 +10,20 @@ const inputNameProfile = popupProfile.querySelector('.popup__input_profile_name'
 const inputAboutProfile = popupProfile.querySelector('.popup__input_profile_about');
 const profileName = document.querySelector('.profile__info-title');
 const profileAbout = document.querySelector('.profile__info-subtitle');
+
 //переменные для карточек
 const popupAddCard = document.querySelector('.popup_add-card');
 const btnAddCard = document.querySelector('.profile__add-card');
 const formEditCard = popupAddCard.querySelector('.popup__form');
-const closingPopupCard = popupAddCard.querySelector('.popup__close');
 const listContainer = document.querySelector('.element-grid');
-//const cardTemplate = document.querySelector('.card-template');
 const nameInputCard = document.querySelector('.popup__input_card_name');
 const linkInputCard = document.querySelector('.popup__input_card_link');
+
 //переменные для большой карточки
 const popupOpenCard = document.querySelector('.popup_open-card');
 const cardBigImage = popupOpenCard.querySelector('.popup__image');
 const cardBigTitle = popupOpenCard.querySelector('.popup__image-title');
-//const closingPopupBigCard = popupOpenCard.querySelector('.popup__close');
+
 const config = {
     formSelector: '.popup__form',
     inputSelector: '.popup__input',
@@ -32,6 +32,7 @@ const config = {
     inputErrorClass: 'popup__input_type_error',
     errorClass: 'popup__error_visible'
 }
+
 const cardFormValidator = new FormValidator(config, formEditCard);
 const profileFormValidator = new FormValidator(config, formEditProfile);
 cardFormValidator.enableValidation();
@@ -63,23 +64,27 @@ const cardObject = [
     link: 'https://ia.wampi.ru/2022/04/14/kezenoyam.jpg'
   }
 ];
+
 cardObject.forEach((item) => {
   const card = new Card(item, '.card-template', handlePhotoClick);
   const cardElement = card.generateCard();
   document.querySelector('.element-grid').append(cardElement);
 });
+
 //функция открытия popup
 function openModalWindow(popup) {
   popup.classList.add('popup_opened');
   popup.addEventListener('mousedown', closeByOverlay);
   document.addEventListener('keydown', closeByEsc);
 }
+
 // функция закрытия popup
 function closeModalWindow(popup) {
   popup.classList.remove('popup_opened');
   popup.removeEventListener('mousedown', closeByOverlay);
   document.removeEventListener('keydown', closeByEsc);
 }
+
 //функция закрытия на esc
 function closeByEsc(evt) {
   if (evt.key === 'Escape') {
@@ -87,19 +92,23 @@ function closeByEsc(evt) {
     closeModalWindow(popupOpened);
   }
 }
+
 //функция закрытия на overlay
 function closeByOverlay(evt) {
   if (evt.target.classList.contains('popup') || evt.target.classList.contains('popup__close')) {
     closeModalWindow(evt.currentTarget)
   }
 }
+
 //функция добавления карточки
 function addCard(evt) {
-  const cardElement = new Card({name: nameInputCard.value, link: linkInputCard.value},
-    '.card-template', handlePhotoClick).generateCard();
+  const card = new Card({name: nameInputCard.value, link: linkInputCard.value},
+    '.card-template', handlePhotoClick);
+  const cardElement = card.generateCard();
   listContainer.prepend(cardElement);
   formEditCard.reset();
 }
+
 //функция клика по карточке
 function handlePhotoClick (item) {
   cardBigImage.src = item.link;
@@ -107,12 +116,14 @@ function handlePhotoClick (item) {
   cardBigTitle.textContent = item.name;
   openModalWindow(popupOpenCard);
 }
+
 //функция сохранения данных при добавлении карточки
 formEditCard.addEventListener('submit', evt => {
   evt.preventDefault();
   closeModalWindow(popupAddCard);
   addCard();
 });
+
 //функция открытия формы для добавления карточки
 btnAddCard.addEventListener('click', () => {
   const submitBtn = popupAddCard.querySelector('.popup__save-button');
@@ -120,6 +131,7 @@ btnAddCard.addEventListener('click', () => {
   cardFormValidator.clearError(config, popupAddCard);
   openModalWindow(popupAddCard);
 });
+
  //функция открытия редактирования профиля
  btnEditProfile.addEventListener('click', () => {
   inputNameProfile.value = `${profileName.textContent}`;
@@ -127,10 +139,12 @@ btnAddCard.addEventListener('click', () => {
   profileFormValidator.clearError(config, popupProfile);
   openModalWindow(popupProfile);
 });
+
  //функция закрытия редактирования профиля
 closingPopupProfile.addEventListener('click', () => {
   closeModalWindow(popupProfile);
 });
+
 //функция сохранения данных редактирования профиля
 formEditProfile.addEventListener('submit', evt => {
   evt.preventDefault();

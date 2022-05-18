@@ -35,32 +35,24 @@ export class FormValidator {
   }
 
   //функция добавления слушателей событий форме и её полям
-  _setEventListeners = () => {
-    //const inputList = Array.from(formElement.querySelectorAll(config.inputSelector));
+  _setEventListeners = (config, formElement) => {
     const buttonElement = this._formElement.querySelector(config.submitButtonSelector);
-    this._toggleButtonState(config.inactiveButtonClass, inputList, buttonElement);
     this._inputList.forEach((inputElement) => {
       inputElement.addEventListener('input', () => {
         this._checkInputValidity(config, formElement, inputElement);
-        this._toggleButtonState(config.inactiveButtonClass, inputList, buttonElement);
+        this._toggleButtonState(config.inactiveButtonClass, buttonElement);
       });
     });
   }
 
   //функция валидации
   enableValidation = () => {
-  const formList = Array.from(document.querySelectorAll(this._formSelector));
-  formList.forEach((formElement) => {
-    formElement.addEventListener('submit', (evt) => {
-      evt.preventDefault();
-    });
-    this._setEventListeners();
-  });
-}
+    this._setEventListeners(this._config, this._formElement);
+  }
 
   //функция проверки невалидных полей
   _hasInvalidInput = () => {
-    return Array.from(inputList).some((inputElement) => {
+    return Array.from(this._inputList).some((inputElement) => {
       return !inputElement.validity.valid;
     });
   }

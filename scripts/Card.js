@@ -1,4 +1,9 @@
 export class Card {
+  _name
+  _link
+  _cardSelector
+  _handlePhotoClick
+  
   constructor(item, cardSelector, handlePhotoClick) {
     this._name = item.name;
     this._link = item.link;
@@ -35,8 +40,7 @@ export class Card {
     this._card.querySelector('.card__delete')
       .addEventListener('click', this._handleDeleteCard);
     this._cardImg.addEventListener('click',
-      () => this._handlePhotoClick(
-      {name: this._name, link: this._link}));
+      () => this._handlePhotoClick({name: this._name, link: this._link}));
     return this._card;
   }
 }
