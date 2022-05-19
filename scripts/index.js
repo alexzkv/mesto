@@ -25,7 +25,6 @@ const cardBigImage = popupOpenCard.querySelector('.popup__image');
 const cardBigTitle = popupOpenCard.querySelector('.popup__image-title');
 
 const config = {
-    formSelector: '.popup__form',
     inputSelector: '.popup__input',
     submitButtonSelector: '.popup__save-button',
     inactiveButtonClass: 'popup__save-button_disabled',
@@ -117,9 +116,8 @@ cardObject.forEach((item) => {
 
 //функция открытия формы для добавления карточки
 btnAddCard.addEventListener('click', () => {
-  const submitBtn = popupAddCard.querySelector('.popup__save-button');
-  cardFormValidator.disableSubmitButton(config.inactiveButtonClass, submitBtn);
-  cardFormValidator.clearError(config, popupAddCard);
+  cardFormValidator.disableSubmitButton();
+  cardFormValidator.clearError();
   openModalWindow(popupAddCard);
 });
 
@@ -134,7 +132,7 @@ formEditCard.addEventListener('submit', evt => {
  btnEditProfile.addEventListener('click', () => {
   inputNameProfile.value = `${profileName.textContent}`;
   inputAboutProfile.value = `${profileAbout.textContent}`;
-  profileFormValidator.clearError(config, popupProfile);
+  profileFormValidator.clearError();
   openModalWindow(popupProfile);
 });
 
