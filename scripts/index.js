@@ -153,4 +153,3 @@ formEditProfile.addEventListener('submit', evt => {
   closeModalWindow(popupProfile);
 });
 
-
