@@ -65,12 +65,6 @@ const cardObject = [
   }
 ];
 
-cardObject.forEach((item) => {
-  const card = new Card(item, '.card-template', handlePhotoClick);
-  const cardElement = card.generateCard();
-  document.querySelector('.element-grid').append(cardElement);
-});
-
 //функция открытия popup
 function openModalWindow(popup) {
   popup.classList.add('popup_opened');
@@ -100,15 +94,6 @@ function closeByOverlay(evt) {
   }
 }
 
-//функция добавления карточки
-function addCard(evt) {
-  const card = new Card({name: nameInputCard.value, link: linkInputCard.value},
-    '.card-template', handlePhotoClick);
-  const cardElement = card.generateCard();
-  listContainer.prepend(cardElement);
-  formEditCard.reset();
-}
-
 //функция клика по карточке
 function handlePhotoClick (item) {
   cardBigImage.src = item.link;
@@ -117,11 +102,17 @@ function handlePhotoClick (item) {
   openModalWindow(popupOpenCard);
 }
 
-//функция сохранения данных при добавлении карточки
-formEditCard.addEventListener('submit', evt => {
-  evt.preventDefault();
-  closeModalWindow(popupAddCard);
-  addCard();
+//функция создания новой9  карточки
+function createCard(item) {
+  const card = new Card(item, '.card-template', handlePhotoClick);
+  const cardElement = card.generateCard();
+  formEditCard.reset();
+  return cardElement;
+}
+
+//функция добавления карточек на страницу
+cardObject.forEach((item) => {
+  listContainer.append(createCard(item));
 });
 
 //функция открытия формы для добавления карточки
@@ -130,6 +121,13 @@ btnAddCard.addEventListener('click', () => {
   cardFormValidator.disableSubmitButton(config.inactiveButtonClass, submitBtn);
   cardFormValidator.clearError(config, popupAddCard);
   openModalWindow(popupAddCard);
+});
+
+//функция сохранения данных при добавлении карточки
+formEditCard.addEventListener('submit', evt => {
+  evt.preventDefault();
+  listContainer.prepend(createCard({name: nameInputCard.value, link: linkInputCard.value}));
+  closeModalWindow(popupAddCard);
 });
 
  //функция открытия редактирования профиля

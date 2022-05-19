@@ -3,7 +3,7 @@ export class Card {
   _link
   _cardSelector
   _handlePhotoClick
-  
+
   constructor(item, cardSelector, handlePhotoClick) {
     this._name = item.name;
     this._link = item.link;
@@ -21,7 +21,6 @@ export class Card {
   }
 
   _handleDeleteCard = (evt) => {
-    this._card = evt.target.closest('.card');
     this._card.remove();
   }
 

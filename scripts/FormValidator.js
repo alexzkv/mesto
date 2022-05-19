@@ -48,7 +48,7 @@ export class FormValidator {
   //функция валидации
   enableValidation = () => {
     this._setEventListeners(this._config, this._formElement);
-  }
+  };
 
   //функция проверки невалидных полей
   _hasInvalidInput = () => {
