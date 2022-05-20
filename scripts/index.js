@@ -1,7 +1,6 @@
 import { Card } from './Card.js';
 import { FormValidator } from './FormValidator.js';
 
-//переменные для профиля
 const popupProfile = document.querySelector('.popup_profile');
 const btnEditProfile = document.querySelector('.profile__edit-button');
 const formEditProfile = popupProfile.querySelector('.popup__form');
@@ -11,7 +10,6 @@ const inputAboutProfile = popupProfile.querySelector('.popup__input_profile_abou
 const profileName = document.querySelector('.profile__info-title');
 const profileAbout = document.querySelector('.profile__info-subtitle');
 
-//переменные для карточек
 const popupAddCard = document.querySelector('.popup_add-card');
 const btnAddCard = document.querySelector('.profile__add-card');
 const formEditCard = popupAddCard.querySelector('.popup__form');
@@ -19,7 +17,6 @@ const listContainer = document.querySelector('.element-grid');
 const nameInputCard = document.querySelector('.popup__input_card_name');
 const linkInputCard = document.querySelector('.popup__input_card_link');
 
-//переменные для большой карточки
 const popupOpenCard = document.querySelector('.popup_open-card');
 const cardBigImage = popupOpenCard.querySelector('.popup__image');
 const cardBigTitle = popupOpenCard.querySelector('.popup__image-title');
@@ -101,11 +98,10 @@ function handlePhotoClick (item) {
   openModalWindow(popupOpenCard);
 }
 
-//функция создания новой9  карточки
+//функция создания новой карточки
 function createCard(item) {
   const card = new Card(item, '.card-template', handlePhotoClick);
   const cardElement = card.generateCard();
-  formEditCard.reset();
   return cardElement;
 }
 
@@ -125,10 +121,11 @@ btnAddCard.addEventListener('click', () => {
 formEditCard.addEventListener('submit', evt => {
   evt.preventDefault();
   listContainer.prepend(createCard({name: nameInputCard.value, link: linkInputCard.value}));
+  formEditCard.reset();
   closeModalWindow(popupAddCard);
 });
 
- //функция открытия редактирования профиля
+ //функция открытия формы редактирования профиля
  btnEditProfile.addEventListener('click', () => {
   inputNameProfile.value = `${profileName.textContent}`;
   inputAboutProfile.value = `${profileAbout.textContent}`;
@@ -136,7 +133,7 @@ formEditCard.addEventListener('submit', evt => {
   openModalWindow(popupProfile);
 });
 
- //функция закрытия редактирования профиля
+ //функция закрытия формы редактирования профиля
 closingPopupProfile.addEventListener('click', () => {
   closeModalWindow(popupProfile);
 });
