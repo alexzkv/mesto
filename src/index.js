@@ -1,5 +1,6 @@
-import { Card } from './Card.js';
-import { FormValidator } from './FormValidator.js';
+import './styles/index.css';
+import { Card } from './scripts/Card';
+import { FormValidator } from './scripts/FormValidator';
 
 const popupProfile = document.querySelector('.popup_profile');
 const btnEditProfile = document.querySelector('.profile__edit-button');
@@ -145,4 +146,3 @@ formEditProfile.addEventListener('submit', evt => {
   profileAbout.textContent = inputAboutProfile.value;
   closeModalWindow(popupProfile);
 });
-
