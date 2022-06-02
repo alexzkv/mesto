@@ -3,12 +3,10 @@ import '../styles/index.css';
 import Card from '../components/Card';
 import FormValidator from '../components/FormValidator';
 import Section from '../components/Section';
+import PopupWithImage from '../components/PopupWithImage';
+// import PopupWithForm from '../components/PopupWithForm';
+// import UserInfo from '../components/UserInfo';
 import { cardObject, cardListSelector, listContainer } from '../utils/constants';
-
-
-
-
-
 
 const popupProfile = document.querySelector('.popup_profile');
 const btnEditProfile = document.querySelector('.profile__edit-button');
@@ -26,9 +24,9 @@ const formEditCard = popupAddCard.querySelector('.popup__form');
 const nameInputCard = document.querySelector('.popup__input_card_name');
 const linkInputCard = document.querySelector('.popup__input_card_link');
 
-const popupOpenCard = document.querySelector('.popup_open-card');
-const cardBigImage = popupOpenCard.querySelector('.popup__image');
-const cardBigTitle = popupOpenCard.querySelector('.popup__image-title');
+// const popupOpenCard = document.querySelector('.popup_open-card');
+// const cardBigImage = popupOpenCard.querySelector('.popup__image');
+// const cardBigTitle = popupOpenCard.querySelector('.popup__image-title');
 
 const config = {
   inputSelector: '.popup__input',
@@ -45,7 +43,7 @@ profileFormValidator.enableValidation();
 
 //создание новой карточки
 const createCard = (item) => {
-  const card = new Card(item, '.card-template', handlePhotoClick);
+  const card = new Card(item, '.card-template', handleCardClick);
   const cardElement = card.generateCard();
   return cardElement;
 }
@@ -71,41 +69,11 @@ formEditCard.addEventListener('submit', evt => {
 
 сardList.renderItems();
 
-//функция открытия popup
-function openModalWindow(popup) {
-  popup.classList.add('popup_opened');
-  popup.addEventListener('mousedown', closeByOverlay);
-  document.addEventListener('keydown', closeByEsc);
-}
-
-// функция закрытия popup
-function closeModalWindow(popup) {
-  popup.classList.remove('popup_opened');
-  popup.removeEventListener('mousedown', closeByOverlay);
-  document.removeEventListener('keydown', closeByEsc);
-}
-
-//функция закрытия на esc
-function closeByEsc(evt) {
-  if (evt.key === 'Escape') {
-    const popupOpened = document.querySelector('.popup_opened');
-    closeModalWindow(popupOpened);
-  }
-}
-
-//функция закрытия на overlay
-function closeByOverlay(evt) {
-  if (evt.target.classList.contains('popup') || evt.target.classList.contains('popup__close')) {
-    closeModalWindow(evt.currentTarget)
-  }
-}
+const popupPhoto = new PopupWithImage('.popup_open-card');
 
 //функция клика по карточке
-function handlePhotoClick (item) {
-  cardBigImage.src = item.link;
-  cardBigImage.alt = item.name;
-  cardBigTitle.textContent = item.name;
-  openModalWindow(popupOpenCard);
+function handleCardClick(item) {
+  popupPhoto.open(item);
 }
 
 
@@ -113,13 +81,12 @@ function handlePhotoClick (item) {
 btnAddCard.addEventListener('click', () => {
   cardFormValidator.disableSubmitButton();
   cardFormValidator.clearError();
-  openModalWindow(popupAddCard);
+  open();
 });
 
  //функция открытия формы редактирования профиля
  btnEditProfile.addEventListener('click', () => {
-  inputNameProfile.value = `${profileName.textContent}`;
-  inputAboutProfile.value = `${profileAbout.textContent}`;
+
   profileFormValidator.clearError();
   openModalWindow(popupProfile);
 });
@@ -137,3 +104,35 @@ formEditProfile.addEventListener('submit', evt => {
   closeModalWindow(popupProfile);
 });
 
+
+
+
+
+// //функция открытия popup
+// function openModalWindow(popup) {
+//   popup.classList.add('popup_opened');
+//   popup.addEventListener('mousedown', closeByOverlay);
+//   document.addEventListener('keydown', closeByEsc);
+// }
+
+// // функция закрытия popup
+// function closeModalWindow(popup) {
+//   popup.classList.remove('popup_opened');
+//   popup.removeEventListener('mousedown', closeByOverlay);
+//   document.removeEventListener('keydown', closeByEsc);
+// }
+
+// //функция закрытия на esc
+// function closeByEsc(evt) {
+//   if (evt.key === 'Escape') {
+//     const popupOpened = document.querySelector('.popup_opened');
+//     closeModalWindow(popupOpened);
+//   }
+// }
+
+// //функция закрытия на overlay
+// function closeByOverlay(evt) {
+//   if (evt.target.classList.contains('popup') || evt.target.classList.contains('popup__close')) {
+//     closeModalWindow(evt.currentTarget)
+//   }
+// }
