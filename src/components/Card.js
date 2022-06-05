@@ -4,9 +4,9 @@ export default class Card {
   _cardSelector
   _handlePhotoClick
 
-  constructor(item, cardSelector, handlePhotoClick) {
-    this._name = item.name;
-    this._link = item.link;
+  constructor({name, link}, cardSelector, handlePhotoClick) {
+    this._name = name;
+    this._link = link;
     this._cardSelector = cardSelector;
     this._handlePhotoClick = handlePhotoClick;
   }

@@ -25,27 +25,22 @@ export const cardObject = [
   }
 ];
 
-export const popupEditProfile = document.querySelector('.popup_profile');
+const popupEditProfile = document.querySelector('.popup_profile');
+export const popupProfileSelector = '.popup_profile';
+export const profileNameSelector = '.profile__info-title';
+export const profileAboutSelector = '.profile__info-subtitle';
 export const btnEditProfile = document.querySelector('.profile__edit-button');
-export const formEditProfile = document.querySelector('.popup__form');
-// export const closingPopupProfile = popupProfile.querySelector('.popup__close');
-// export const inputNameProfile = popupProfile.querySelector('.popup__input_profile_name');
-// export const inputAboutProfile = popupProfile.querySelector('.popup__input_profile_about');
-export const profileName = document.querySelector('.profile__info-title');
-export const profileAbout = document.querySelector('.profile__info-subtitle');
+export const formEditProfile = popupEditProfile.querySelector('.popup__form');
+export const inputNameProfile = document.querySelector('.popup__input_profile_name');
+export const inputAboutProfile = document.querySelector('.popup__input_profile_about');
 
-export const popupAddCard = document.querySelector('.popup_add-card');
-export const btnAddCard = document.querySelector('.profile__add-card');
-export const formEditCard = document.querySelector('.popup__form');
+const popupAddCard = document.querySelector('.popup_add-card');
 export const cardListSelector = '.element-grid';
-export const listContainer = document.querySelector('.element-grid');
-// export const nameInputCard = document.querySelector('.popup__input_card_name');
-// export const linkInputCard = document.querySelector('.popup__input_card_link');
-
-export const popupOpenCard = document.querySelector('.popup_open-card');
-// export const cardBigImage = popupOpenCard.querySelector('.popup__image');
-// export const cardBigTitle = popupOpenCard.querySelector('.popup__image-title');
-export const cardTemplate = document.querySelector('.card-template');
+export const popupAddCardSelector = '.popup_add-card';
+export const cardTemplateSelector = '.card-template';
+export const popupOpenCardSelector = '.popup_open-card';
+export const btnAddCard = document.querySelector('.profile__add-card');
+export const formAddCard = popupAddCard.querySelector('.popup__form');
 
 export const config = {
   inputSelector: '.popup__input',
