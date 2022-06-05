@@ -1,14 +1,12 @@
-import Popup from "./Popup";
+import Popup from './Popup';
 
 export default class PopupWithImage extends Popup {
   open(item) {
-    const cardBigImage = this._popup.querySelector('.popup__image');
-    const cardBigTitle = this._popup.querySelector('.popup__image-title');
-
-    cardBigImage.src = item.link;
-    cardBigImage.alt = item.name;
-    cardBigTitle.textContent = item.name;
-
+    const bigCardImage = this._popup.querySelector('.popup__image');
+    const bigCardTitle = this._popup.querySelector('.popup__image-title');
+    bigCardImage.src = item.link;
+    bigCardImage.alt = item.name;
+    bigCardTitle.textContent = item.name;
     super.open();
   }
 }
