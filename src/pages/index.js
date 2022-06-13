@@ -55,7 +55,7 @@ function handleCardClick(item) {
 }
 
 const сardList = new Section({
-  items: cardObject,
+  cards: cardObject,
   renderer: (item) => {
     const card = createCard(item);
     сardList.addItem(card);

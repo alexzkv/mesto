@@ -3,13 +3,13 @@ export default class Section {
   _renderer
   _container
 
-  constructor({ items, renderer }, containerSelector) {
-    this._renderedItems = items;
+  constructor({ cards, renderer }, containerSelector) {
+    this._renderedItems = cards;
     this._renderer = renderer;
     this._container = document.querySelector(containerSelector);
   }
 
-  renderItems = () => {
+  renderItems = (items) => {
     this._renderedItems.forEach(item => {
       this._renderer(item);
     });
