@@ -26,12 +26,12 @@ export default class Card {
   }
 
   _handleLikeCard = () => {
-    this._btnCardLike.classList.toggle('card__like_active');
+    this._btnCardLike.classList.toggle('card__like-btn_active');
   }
 
   generateCard = () => {
     this._card = this._getTemplate();
-    this._btnCardLike = this._card.querySelector('.card__like');
+    this._btnCardLike = this._card.querySelector('.card__like-btn');
     this._cardImg = this._card.querySelector('.card__img');
     this._cardImg.src= this._link;
     this._cardImg.alt= this._name;

@@ -14,7 +14,7 @@
 
   <main>
     <section class="profile">
-      <img src="<%=require('./images/jacques-yves-cousteau.jpg')%>" alt="Аватар" class="profile__avatar">
+      <a href="#" class="profile__avatar"></a>
       <div class="profile__info">
         <h1 class="profile__info-title">Жак-Ив Кусто</h1>
         <button type="button" aria-label="Редактировать профиль" class="profile__edit-button"></button>
@@ -40,7 +40,10 @@
       <button type="button" aria-label="Удалить карточку" class="card__delete"></button>
       <div class="card__description">
         <h2 class="card__title"></h2>
-        <button type="button" aria-label="Лайкнуть сердечко" class="card__like"></button>
+        <a class="card__like-box">
+          <button type="button" aria-label="Лайкнуть сердечко" class="card__like-btn"></button>
+          <span class="card__like-count">?</span>
+        </a>
       </div>
     </li>
   </template>
@@ -106,6 +109,16 @@
       </form>
     </div>
   </div>
+
+  <div class="popup popup_delete-card">
+    <div class="popup__container">
+      <button  type="button" aria-label="Закрыть форму" class="popup__close"></button>
+      <h2 class="popup__title">Вы уверены?</h2>
+      <button type="submit" aria-label="Да" class="popup__save-button">Да</button>
+    </div>
+  </div>
+
+
 
   <div class="popup popup_open-card">
     <div class="popup__container popup__container_open_img">

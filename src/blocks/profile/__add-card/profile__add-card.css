@@ -8,7 +8,7 @@
   border: 2px solid #fff;
   border-radius: 2px;
   box-sizing: border-box;
-  background: no-repeat center url(../../../images/edit-form.svg);
+  background: no-repeat center url(../../../images/add-button.svg);
   background-size: 22px;
   cursor: pointer;
   transition: opacity .5s linear;

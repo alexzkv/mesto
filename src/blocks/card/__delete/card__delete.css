@@ -6,7 +6,7 @@
   height: 19px;
   margin: 0;
   padding: 0;
-  background: no-repeat url(../../../images/Trash.svg);
+  background: no-repeat url(../../../images/delete-button.svg);
   border: none;
   cursor: pointer;
   transition: opacity .5s linear;

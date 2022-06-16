@@ -1,7 +1,7 @@
-.card__like {
+.card__like-btn {
   height: 19px;
   width: 22px;
-  margin: 0 20px;
+  margin: 0 20px 3px;
   padding: 0;
   background: no-repeat center url(../../../images/edit-like.svg);
   background-size: 100%;
@@ -11,6 +11,6 @@
   transition: opacity .5s linear;
 }
 
-.card__like:hover {
+.card__like-btn:hover {
   opacity: .5;
 }
