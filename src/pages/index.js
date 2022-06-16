@@ -20,7 +20,6 @@ import {
   formAddCard,
   btnAddCard,
   config,
-  // cardObject,
   cardListSelector
  } from '../utils/constants';
 

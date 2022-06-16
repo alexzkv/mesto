@@ -1,4 +1,8 @@
 export default class Api {
+  _url
+  _token
+  _headers
+
   constructor(url, token) {
     this._url = url;
     this._token = token;
@@ -10,11 +14,12 @@ export default class Api {
 
   getCards() {
     return fetch(this._url, {
+      method: 'GET',
       headers: this._headers
     })
       .then((res) => {
         if (res.ok) {
-          return res.json()
+          return res.json();
         }
         return Promise.reject('Ошибка');
       });

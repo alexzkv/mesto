@@ -1,30 +1,3 @@
-// export const cardObject = [
-//   {
-//     name: 'Москва-Сити',
-//     link: 'https://ia.wampi.ru/2022/04/14/moscow-city.jpg'
-//   },
-//   {
-//     name: 'Демерджи-яйла',
-//     link: 'https://ia.wampi.ru/2022/04/14/demerdzhi-yayla.jpg'
-//   },
-//   {
-//     name: 'Тиб',
-//     link: 'https://ie.wampi.ru/2022/04/14/tib.jpg'
-//   },
-//   {
-//     name: 'Коломенский дворец',
-//     link: 'https://ie.wampi.ru/2022/04/14/kolomna-palace.jpg'
-//   },
-//   {
-//     name: 'Фиолент',
-//     link: 'https://ie.wampi.ru/2022/04/14/fiolent.jpg'
-//   },
-//   {
-//     name: 'Кезенойам',
-//     link: 'https://ia.wampi.ru/2022/04/14/kezenoyam.jpg'
-//   }
-// ];
-
 const popupEditProfile = document.querySelector('.popup_profile');
 export const popupProfileSelector = '.popup_profile';
 export const profileNameSelector = '.profile__info-title';
