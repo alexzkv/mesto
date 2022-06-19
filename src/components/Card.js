@@ -1,10 +1,11 @@
 export default class Card {
   _name
   _link
+  _id
   _cardSelector
   _handlePhotoClick
 
-  constructor({name, link}, cardSelector, handlePhotoClick) {
+  constructor({name, link, _id}, cardSelector, handlePhotoClick) {
     this._name = name;
     this._link = link;
     this._cardSelector = cardSelector;
@@ -31,6 +32,7 @@ export default class Card {
 
   generateCard = () => {
     this._card = this._getTemplate();
+    // this._card.dataset.cardId = this._id;
     this._btnCardLike = this._card.querySelector('.card__like-btn');
     this._cardImg = this._card.querySelector('.card__img');
     this._cardImg.src= this._link;
