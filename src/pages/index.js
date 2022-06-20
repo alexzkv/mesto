@@ -86,6 +86,7 @@ const createCard = (item) => {
 
 const popupProfile = new PopupWithForm(popupProfileSelector, {
   submitForm: (data) => {
+    popupProfile.isSaving();
     api.updateInfo({ name: data['profile-name'], about: data['profile-about'] })
       .then((res) => {
         userInfo.setUserInfo(res);
@@ -98,9 +99,10 @@ const popupProfile = new PopupWithForm(popupProfileSelector, {
 
 const popupUpdateAvatar = new PopupWithForm(popupAvatarSelector, {
   submitForm: (data) => {
+    popupUpdateAvatar.isSaving();
     api.updateAvatar(data['avatar-name'])
       .then((res) => {
-        setUserInfo(res);
+        userInfo.setUserInfo(res);
         popupUpdateAvatar.close();
       })
       .catch((err) =>
@@ -165,11 +167,6 @@ popupCard.setEventListeners();
 // popupConfirm.setEventListeners();
 popupBigCard.setEventListeners();
 popupUpdateAvatar.setEventListeners();
-
-
-
-
-
 
 
   // function deleteCardHandler(cardId) {
