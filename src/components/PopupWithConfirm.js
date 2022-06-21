@@ -1,6 +1,7 @@
 import Popup from './Popup';
 
 export default class PopupWithConfirm extends Popup {
+_handleSubmitCallback
 
   setSubmitAction(action) {
     this._handleSubmitCallback = action;

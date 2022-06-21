@@ -23,8 +23,8 @@ import {
   cardTemplateSelector,
   formAddCard,
   btnAddCard,
-  // btnDeleteCard,
-  // popupConfirmSelector,
+  btnDeleteCard,
+  popupConfirmSelector,
   btnUpdateAvatar,
   popupAvatarSelector,
   formUpdateAvatar,
@@ -36,17 +36,24 @@ const api = new Api(
   'https://mesto.nomoreparties.co/v1/cohort-43/',
   'db177002-d58e-42cc-a0cb-65827554d6b2'
 );
+
 const cardFormValidator = new FormValidator(config, formAddCard);
 const profileFormValidator = new FormValidator(config, formEditProfile);
 const avatarFormValidator = new FormValidator(config, formUpdateAvatar);
+const userInfo = new UserInfo(profileNameSelector, profileAboutSelector, profileAvatarSelector);
+const popupConfirm = new PopupWithConfirm(popupConfirmSelector);
+const popupBigCard = new PopupWithImage(popupOpenCardSelector);
+
+let userId = null;
 
 api.getUserInfo()
   .then((userData) => {
+    userId = userData.id;
     userInfo.setUserInfo(userData);
   })
   .catch((err) => {
     console.log(err);
-  })
+  });
 
 let сardList;
 
@@ -54,8 +61,8 @@ api.getCards()
   .then((items) => {
     сardList = new Section({
       cards: items,
-      renderer: (item) => {
-        const card = createCard(item);
+      renderer: (data) => {
+        const card = createCard(data);
         сardList.addItem(card);
       }
     },
@@ -66,19 +73,49 @@ api.getCards()
     console.log(err);
   });
 
-const createCard = (item) => {
+function handleCardClick(item) {
+  popupBigCard.open(item);
+}
+
+function likeBtnClick(card) {
+  api.likeCard(card.id)
+  .then((res) => {
+    card.setLikes(res);
+  })
+  .catch((err) =>
+  console.log(err));
+}
+
+function deleteLikeBtnClick(card) {
+  api.deleteLikeCard(card.id)
+  .then((res) => {
+    card.setLikes(res);
+  })
+  .catch((err) =>
+  console.log(err));
+}
+
+const createCard = (data) => {
   const card = new Card(
-    item,
+    data,
+    // userInfo.getUserInfo(),
     cardTemplateSelector,
-    handleCardClick,
-    // handleDeleteBtnClick: (card) => {
-    //   popupConfirm.open();
-    //   popupConfirm.setSubmitAction(() => {
-    //     api.deleteCard(card.id).then(() => {
-    //       card.deleteCard();
-    //     });
-    //   });
-    // }
+    { handleCardClick,
+    handleDeleteBtnClick: (card) => {
+      popupConfirm.open();
+      popupConfirm.setSubmitAction(() => {
+        api.deleteCard(card.id)
+          .then(() => {
+            card.deleteCard();
+            popupConfirm.close();
+          })
+          .catch((err) =>
+          console.log(err));
+      });
+    },
+    likeBtnClick,
+    deleteLikeBtnClick
+    }
   );
   const cardElement = card.generateCard();
   return cardElement;
@@ -110,8 +147,6 @@ const popupUpdateAvatar = new PopupWithForm(popupAvatarSelector, {
   }
 });
 
-// const popupConfirm = new PopupWithConfirm(popupConfirmSelector);
-
 const popupCard = new PopupWithForm(popupAddCardSelector, {
   submitForm: (data) => {
     popupCard.isSaving();
@@ -126,13 +161,21 @@ const popupCard = new PopupWithForm(popupAddCardSelector, {
   }
 });
 
-const popupBigCard = new PopupWithImage(popupOpenCardSelector);
+// const handleDeleteBtnClick = (card) => {
+//   // popupConfirm.open(card);
+//   popupConfirm.setSubmitAction(() => {
+//   api.deleteCard(card.id)
+//     .then(() => {
+//       сard.deleteCard()
+//     })
+//     .catch((err) =>
+//     console.log(err));
+//   });
+// }
 
-function handleCardClick(item) {
-  popupBigCard.open(item);
-}
-
-const userInfo = new UserInfo(profileNameSelector, profileAboutSelector, profileAvatarSelector);
+// // btnDeleteCard.addEventListener('click', () => {
+// //   popupConfirm.open();
+// // });
 
 btnUpdateAvatar.addEventListener('click', () => {
   avatarFormValidator.disableSubmitButton();
@@ -154,26 +197,11 @@ btnAddCard.addEventListener('click', () => {
   popupCard.open();
 });
 
-// btnDeleteCard.addEventListener('click', () => {
-
-//   popupConfirm.open();
-// });
-
 cardFormValidator.enableValidation();
 profileFormValidator.enableValidation();
 avatarFormValidator.enableValidation();
 popupProfile.setEventListeners();
 popupCard.setEventListeners();
-// popupConfirm.setEventListeners();
+popupConfirm.setEventListeners();
 popupBigCard.setEventListeners();
 popupUpdateAvatar.setEventListeners();
-
-
-  // function deleteCardHandler(cardId) {
-  //   api.deleteCard(cardId)
-  //     .then(() => {
-
-  //     })
-  // }
-
-
