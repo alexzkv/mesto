@@ -1,26 +1,27 @@
 export default class Card {
-  id
+  _data
   _name
   _link
-  _likes
+  _userId
+  _ownerId
   _cardSelector
   _handlePhotoClick
-  _handleDeleteBtnClick
-  _handleLikeBtnClick
-  _handleDeleteLikeBtnClick
+  _handleDeleteIconClick
+  _handleLikeIconClick
+  _handleDislikeIconClick
 
-  constructor({ _id, name, link, likes },
-    cardSelector, { handlePhotoClick, handleDeleteBtnClick,
-    handleLikeBtnClick, handleDeleteLikeBtnClick }) {
-    this.id = _id;
-    this._name = name;
-    this._link = link;
-    this._likes = likes;
+  constructor(data, userId, cardSelector,
+    { handleCardClick, handleDeleteBtnClick, handleLikeBtnClick, handleDislikeBtnClick }) {
+    this._data = data;
+    this._name = data.name;
+    this._link = data.link;
+    this._userId = userId;
+    this._ownerId = data.owner._id;
     this._cardSelector = cardSelector;
-    this._handlePhotoClick = handlePhotoClick;
-    this._handleDeleteBtnClick = handleDeleteBtnClick;
-    this._handleLikeBtnClick = handleLikeBtnClick;
-    this._handleDeleteLikeBtnClick = handleDeleteLikeBtnClick;
+    this._handlePhotoClick = handleCardClick;
+    this._handleDeleteIconClick = handleDeleteBtnClick;
+    this._handleLikeIconClick = handleLikeBtnClick;
+    this._handleDislikeIconClick = handleDislikeBtnClick;
   }
 
   _getTemplate = () => {
@@ -37,41 +38,67 @@ export default class Card {
     this._card = null;
   }
 
-  _handleLikeCard = () => {
-    this._btnCardLike.classList.toggle('card__like-btn_active');
-    this._isLiked = !this._isLiked;
+  _isLiked = () => {
+    return this._data.likes.some((item) => item._id === this._userId);
   }
 
-  _toggleLikeCard() {
-    if (this._isLiked) {
-      this._handleDeleteLikeBtnClick(this);
+  _isLikeStatus = () => {
+    if(this._isLiked()) {
+      this._handleDislikeIconClick(this._data);
     } else {
-      this._handleLikeBtnClick(this);
+      this._handleLikeIconClick(this._data);
     }
   }
 
-  setLikes(card) {
-    this._likes = card.likes;
-    this._likesСounter.textContent = this._likes.lenght;
-    this._handleLikeCard();
+  _countLikes = (data) => {
+    this._data.likes = data.likes;
+    this._likesСounter.textContent = String(this._data.likes.length);
+  }
+
+  _chekOwnerLike = () => {
+    if (this._isLiked()) {
+      this.handleLikeCard(this._data);
+    }
+  }
+
+  handleLikeCard = (data) => {
+    this._btnCardLike.classList.add('card__like-btn_active');
+    this._countLikes(data);
+  }
+
+  handleDislikeCard = (data) => {
+    this._btnCardLike.classList.remove('card__like-btn_active');
+    this._countLikes(data);
+  }
+
+  _chekOwnerCard = () => {
+    if (this._userId !== this._ownerId) {
+      this._btnDeleteCard.remove();
+    }
   }
 
   generateCard = () => {
     this._card = this._getTemplate();
-    // this._card.dataset.cardId = this._id;
+
     this._card.querySelector('.card__title').textContent = this._name;
-    this._card.querySelector('.card__delete')
-      .addEventListener('click', () => {
-        this._handleDeleteBtnClick(this);
-      });
-    this._btnCardLike = this._card.querySelector('.card__like-btn');
-    this._btnCardLike.addEventListener('click', this._handleLikeCard);
-    this._likesСounter = this._card.querySelector('.card__like-count');
     this._cardImg = this._card.querySelector('.card__img');
     this._cardImg.src= this._link;
     this._cardImg.alt= this._name;
-    this._cardImg.addEventListener('click',
-      () => this._handlePhotoClick({name: this._name, link: this._link}));
+    this._cardImg.addEventListener('click', () =>
+      this._handlePhotoClick(this._data));
+
+    this._btnDeleteCard = this._card.querySelector('.card__delete');
+    this._btnDeleteCard.addEventListener('click', () =>
+      this._handleDeleteIconClick(this._data._id));
+
+    this._btnCardLike = this._card.querySelector('.card__like-btn');
+    this._btnCardLike.addEventListener('click', this._isLikeStatus);
+    this._likesСounter = this._card.querySelector('.card__like-count');
+    this._likesСounter.textContent = String(this._data.likes.length);
+
+    this._chekOwnerLike();
+    this._chekOwnerCard();
+
     return this._card;
   }
 }

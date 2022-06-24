@@ -6,8 +6,6 @@ export const btnEditProfile = document.querySelector('.profile__edit-button');
 export const formEditProfile = popupEditProfile.querySelector('.popup__form');
 export const inputNameProfile = document.querySelector('.popup__input_profile_name');
 export const inputAboutProfile = document.querySelector('.popup__input_profile_about');
-// export const profileName = document.querySelector('.profile__info-title');
-// export const profileAbout = document.querySelector('.profile__info-subtitle');
 
 const popupUpdateAvatar = document.querySelector('.popup_update-avatar');
 export const popupAvatarSelector = '.popup_update-avatar';

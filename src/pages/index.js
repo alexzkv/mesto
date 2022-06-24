@@ -14,8 +14,6 @@ import {
   profileNameSelector,
   profileAboutSelector,
   profileAvatarSelector,
-  // profileName,
-  // profileAbout,
   inputNameProfile,
   inputAboutProfile,
   popupAddCardSelector,
@@ -23,7 +21,6 @@ import {
   cardTemplateSelector,
   formAddCard,
   btnAddCard,
-  btnDeleteCard,
   popupConfirmSelector,
   btnUpdateAvatar,
   popupAvatarSelector,
@@ -48,12 +45,10 @@ let userId = null;
 
 api.getUserInfo()
   .then((userData) => {
-    userId = userData.id;
+    userId = userData._id;
     userInfo.setUserInfo(userData);
   })
-  .catch((err) => {
-    console.log(err);
-  });
+  .catch((err) => console.log(err));
 
 let сardList;
 
@@ -69,54 +64,38 @@ api.getCards()
     cardListSelector);
     сardList.renderItems();
   })
-  .catch((err) => {
-    console.log(err);
-  });
-
-function handleCardClick(item) {
-  popupBigCard.open(item);
-}
-
-function likeBtnClick(card) {
-  api.likeCard(card.id)
-  .then((res) => {
-    card.setLikes(res);
-  })
-  .catch((err) =>
-  console.log(err));
-}
-
-function deleteLikeBtnClick(card) {
-  api.deleteLikeCard(card.id)
-  .then((res) => {
-    card.setLikes(res);
-  })
-  .catch((err) =>
-  console.log(err));
-}
+  .catch((err) => console.log(err));
 
 const createCard = (data) => {
-  const card = new Card(
-    data,
-    // userInfo.getUserInfo(),
-    cardTemplateSelector,
-    { handleCardClick,
-    handleDeleteBtnClick: (card) => {
+  const card = new Card(data, userId, cardTemplateSelector,
+  {
+    handleCardClick: () => { popupBigCard.open(data) },
+    handleDeleteBtnClick: (_id) => {
       popupConfirm.open();
       popupConfirm.setSubmitAction(() => {
-        api.deleteCard(card.id)
+        api.deleteCard(_id)
           .then(() => {
-            card.deleteCard();
+            card.handleDeleteCard();
             popupConfirm.close();
           })
-          .catch((err) =>
-          console.log(err));
-      });
+          .catch((err) => console.log(err));
+      })
     },
-    likeBtnClick,
-    deleteLikeBtnClick
+    handleLikeBtnClick: (data) => {
+      api.likeCard(data._id)
+        .then((res) => {
+          card.handleLikeCard(res)
+        })
+        .catch((err) => console.log(err));
+    },
+    handleDislikeBtnClick: (data) => {
+      api.dislikeCard(data._id)
+        .then((res) => {
+          card.handleDislikeCard(res)
+        })
+        .catch((err) => console.log(err));
     }
-  );
+  });
   const cardElement = card.generateCard();
   return cardElement;
 }
@@ -129,8 +108,7 @@ const popupProfile = new PopupWithForm(popupProfileSelector, {
         userInfo.setUserInfo(res);
         popupProfile.close();
       })
-      .catch((err) =>
-      console.log(err));
+      .catch((err) => console.log(err));
   }
 });
 
@@ -142,8 +120,7 @@ const popupUpdateAvatar = new PopupWithForm(popupAvatarSelector, {
         userInfo.setUserInfo(res);
         popupUpdateAvatar.close();
       })
-      .catch((err) =>
-      console.log(err));
+      .catch((err) => console.log(err));
   }
 });
 
@@ -151,36 +128,13 @@ const popupCard = new PopupWithForm(popupAddCardSelector, {
   submitForm: (data) => {
     popupCard.isSaving();
     api.addCard({ name: data['item-name'], link: data['item-link'] })
-      .then((res) => {
-        const card = createCard(res);
+      .then((data) => {
+        const card = createCard(data);
         сardList.addItem(card);
         popupCard.close();
       })
-      .catch((err) =>
-      console.log(err));
+      .catch((err) => console.log(err));
   }
-});
-
-// const handleDeleteBtnClick = (card) => {
-//   // popupConfirm.open(card);
-//   popupConfirm.setSubmitAction(() => {
-//   api.deleteCard(card.id)
-//     .then(() => {
-//       сard.deleteCard()
-//     })
-//     .catch((err) =>
-//     console.log(err));
-//   });
-// }
-
-// // btnDeleteCard.addEventListener('click', () => {
-// //   popupConfirm.open();
-// // });
-
-btnUpdateAvatar.addEventListener('click', () => {
-  avatarFormValidator.disableSubmitButton();
-  avatarFormValidator.clearError();
-  popupUpdateAvatar.open();
 });
 
 btnEditProfile.addEventListener('click', () => {
@@ -189,6 +143,12 @@ btnEditProfile.addEventListener('click', () => {
   inputAboutProfile.value = about;
   profileFormValidator.clearError();
   popupProfile.open();
+});
+
+btnUpdateAvatar.addEventListener('click', () => {
+  avatarFormValidator.disableSubmitButton();
+  avatarFormValidator.clearError();
+  popupUpdateAvatar.open();
 });
 
 btnAddCard.addEventListener('click', () => {
