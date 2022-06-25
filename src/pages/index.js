@@ -42,29 +42,26 @@ const popupConfirm = new PopupWithConfirm(popupConfirmSelector);
 const popupBigCard = new PopupWithImage(popupOpenCardSelector);
 
 let userId = null;
-
-api.getUserInfo()
-  .then((userData) => {
-    userId = userData._id;
-    userInfo.setUserInfo(userData);
-  })
-  .catch((err) => console.log(err));
-
 let сardList;
 
-api.getCards()
-  .then((items) => {
-    сardList = new Section({
-      cards: items,
-      renderer: (data) => {
-        const card = createCard(data);
-        сardList.addItem(card);
-      }
-    },
-    cardListSelector);
-    сardList.renderItems();
-  })
-  .catch((err) => console.log(err));
+Promise.all([
+  api.getUserInfo(),
+  api.getCards()
+])
+.then(([userData, items]) => {
+  userId = userData._id;
+  userInfo.setUserInfo(userData);
+  сardList = new Section({
+    cards: items,
+    renderer: (data) => {
+      const card = createCard(data);
+      сardList.addItem(card);
+    }
+  },
+  cardListSelector);
+  сardList.renderItems();
+})
+.catch((err) => console.log(err));
 
 const createCard = (data) => {
   const card = new Card(data, userId, cardTemplateSelector,

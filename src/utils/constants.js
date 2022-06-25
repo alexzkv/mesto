@@ -21,7 +21,6 @@ export const popupOpenCardSelector = '.popup_open-card';
 export const btnAddCard = document.querySelector('.profile__add-card');
 export const formAddCard = popupAddCard.querySelector('.popup__form');
 
-export const btnDeleteCard = document.querySelector('.card__delete');
 export const popupConfirmSelector = '.popup_confirm';
 
 export const config = {
