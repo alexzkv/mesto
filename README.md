@@ -8,7 +8,6 @@
 - _CSS_
 - _JS_
 
-
 ## Реализация
 - _Flexbox-вёрстка_
 - _Grid Layout_
@@ -17,8 +16,4 @@
 - _Использование принципов ООП_
 - _API_
 
-***
-
 __URL:__ https://alexzkv.github.io/mesto/
-
-***
