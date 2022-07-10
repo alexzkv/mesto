@@ -2,9 +2,9 @@
 
 Одностраничный сайт адаптированный под все типы устройств с возможностью делиться своими фотографиями.
 
-**[Ссылка на проект](https://alexzkv.github.io/mesto/)**
+**[Посмотреть проект можно здесь](https://alexzkv.github.io/mesto/)**
 
-[Ссылка на проект в Figma](https://alexzkv.github.io/mesto/)
+[Ссылка на макет проекта в Figma](https://www.figma.com/file/2cn9N9jSkmxD84oJik7xL7/JavaScript.-Sprint-4?node-id=0%3A1)
 
 __Функциональность__
 
