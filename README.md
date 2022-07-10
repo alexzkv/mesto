@@ -23,6 +23,7 @@ __Стек__
 - HTML
 - CSS
 - JavaScript
+- Webpack
 
 ***
 
