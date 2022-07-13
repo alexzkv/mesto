@@ -1,4 +1,4 @@
-[![Typing SVG](https://readme-typing-svg.herokuapp.com?font=Lora&size=35&color=000000&width=500&lines=%D0%9F%D1%80%D0%BE%D0%B5%D0%BA%D1%82%3A+%D0%9C%D0%B5%D1%81%D1%82%D0%BE)](https://git.io/typing-svg)
+[![Typing SVG](https://readme-typing-svg.herokuapp.com?font=Lora&size=35&color=808080&width=500&lines=%D0%9F%D1%80%D0%BE%D0%B5%D0%BA%D1%82%3A+%D0%9C%D0%B5%D1%81%D1%82%D0%BE)](https://git.io/typing-svg)
 
 Одностраничный сайт адаптированный под все типы устройств с возможностью делиться своими фотографиями.
 
